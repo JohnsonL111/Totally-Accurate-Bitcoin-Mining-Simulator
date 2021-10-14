@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment3">
         <activity
+            android:name=".ui.GameActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.OptionsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.HelpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.MainMenuActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
