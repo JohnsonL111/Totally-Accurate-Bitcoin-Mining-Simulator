@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -14,6 +15,10 @@ import cmpt276.assignments.assignment3.R;
 import cmpt276.assignments.assignment3.model.OptionsManager;
 
 public class OptionsActivity extends AppCompatActivity {
+    public static final String BOARD_SIZE_X_PREFS = "BoardSizeXPrefs";
+    public static final String BOARD_SIZE_Y_PREFS = "BoardSizeYPrefs";
+    public static final String APP_PREFS = "AppPrefs";
+    public static final String NUM_MINES_PREFS = "NumberOfMinesPrefs";
     private OptionsManager options;
 
     @Override
@@ -23,8 +28,8 @@ public class OptionsActivity extends AppCompatActivity {
 
         options = OptionsManager.getInstance();
 
-        setBoardSizeOptions();
-        setNumMinesOptions();
+        setNumMinesOptionsBtn();
+        setBoardSizeOptionsBtn();
     }
 
     public static Intent makeIntent(Context context) {
@@ -32,56 +37,107 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void setBoardSizeOptions() {
+    private void setBoardSizeOptionsBtn() {
         RadioGroup boardSizeGroup = findViewById(R.id.radio_group_board_size);
 
-        int[] boardSizeXList = getResources().getIntArray(R.array.board_size_x);
-        int[] boardSizeYList = getResources().getIntArray(R.array.board_size_y);
+        int[] boardSizeXList = getResources().getIntArray(R.array.board_list_x);
+        int[] boardSizeYList = getResources().getIntArray(R.array.board_list_y);
 
         for(int i = 0; i < boardSizeXList.length; i++){
-            final int boardSizeX = boardSizeXList[i];
-            final int boardSizeY = boardSizeYList[i];
+            final int boardDimensionX = boardSizeXList[i];
+            final int boardDimensionY = boardSizeYList[i];
 
             RadioButton boardSizeBtn = new RadioButton(this);
             boardSizeBtn.setText(
-                    boardSizeX + getString(R.string.rows) +
-                    boardSizeY + getString(R.string.columns)
+                    boardDimensionX + getString(R.string.rows) +
+                    boardDimensionY + getString(R.string.columns)
             );
 
             // set options to singleton
-            boardSizeGroup.setOnClickListener(new View.OnClickListener() {
+            boardSizeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    options.setBoardDimensionX(boardSizeX);
-                    options.setBoardDimensionY(boardSizeY);
+                    options.setBoardDimensionX(boardDimensionX);
+                    options.setBoardDimensionY(boardDimensionY);
+
+                    saveBoardDimensions(boardDimensionX, boardDimensionY);
                 }
             });
 
             boardSizeGroup.addView(boardSizeBtn);
+
+            if (boardDimensionX == getBoardDimensionX(this)){
+                boardSizeBtn.setChecked(true);
+            }
         }
     }
 
+    private void saveBoardDimensions(int boardSizeX, int boardSizeY) {
+        SharedPreferences boardSizePrefs = this.getSharedPreferences(APP_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = boardSizePrefs.edit();
+
+        editor.putInt(BOARD_SIZE_X_PREFS, boardSizeX);
+        editor.putInt(BOARD_SIZE_Y_PREFS, boardSizeY);
+
+        editor.apply();
+    }
+
+    static public int getBoardDimensionX(Context context){
+        SharedPreferences boardSizePrefs = context.getSharedPreferences(APP_PREFS, MODE_PRIVATE);
+
+        int defaultDimX = context.getResources().getInteger(R.integer.default_dimension_x);
+        return boardSizePrefs.getInt(BOARD_SIZE_X_PREFS, defaultDimX);
+    }
+
+    static public int getBoardDimensionY(Context context){
+        SharedPreferences boardSizePrefs = context.getSharedPreferences(APP_PREFS, MODE_PRIVATE);
+
+        int defaultDimY = context.getResources().getInteger(R.integer.default_dimension_y);
+        return boardSizePrefs.getInt(BOARD_SIZE_Y_PREFS, defaultDimY);
+    }
+
     @SuppressLint("SetTextI18n")
-    private void setNumMinesOptions() {
+    private void setNumMinesOptionsBtn() {
         RadioGroup numMinesGroup = findViewById(R.id.radio_group_num_mines);
 
         int[] minesList = getResources().getIntArray(R.array.num_mines);
 
         // create the buttons
+//        for (final int numMines : minesList) {
         for (final int numMines : minesList) {
-            RadioButton radioBtn = new RadioButton(this);
-            radioBtn.setText(numMines + getString(R.string.num_mines_radio_button));
+            RadioButton numMinesBtn = new RadioButton(this);
+            numMinesBtn.setText(numMines + getString(R.string.num_mines_radio_button));
 
             // set options to singleton
-            radioBtn.setOnClickListener(new View.OnClickListener() {
+            numMinesBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     options.setNumMines(numMines);
+                    saveNumMines(numMines);
                 }
             });
 
             // add the radio buttons to the group
-            numMinesGroup.addView(radioBtn);
+            numMinesGroup.addView(numMinesBtn);
+
+            // select default button
+            if (numMines == getNumMines(this)) {
+                numMinesBtn.setChecked(true);
+            }
         }
+    }
+
+    private void saveNumMines(int numMines) {
+        SharedPreferences boardSizePrefs = this.getSharedPreferences(APP_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = boardSizePrefs.edit();
+        editor.putInt(NUM_MINES_PREFS, numMines);
+        editor.apply();
+    }
+
+    static public int getNumMines(Context context){
+        SharedPreferences boardSizePrefs = context.getSharedPreferences(APP_PREFS, MODE_PRIVATE);
+
+        int defaultMines = context.getResources().getInteger(R.integer.default_num_mines);
+        return boardSizePrefs.getInt(NUM_MINES_PREFS, defaultMines);
     }
 }
