@@ -14,4 +14,9 @@
                                  (<a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home" >https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home</a>)
     </string>
     <string name="resources_info">Resources \n images used..... idk </string>
+    <string name="num_mines_radio_button">" mines"</string>
+    <string name="board_size_title">Board Size:</string>
+    <string name="number_of_mine_title">Number of Mines:</string>
+    <string name="rows">" rows x "</string>
+    <string name="columns">" columns"</string>
 </resources>

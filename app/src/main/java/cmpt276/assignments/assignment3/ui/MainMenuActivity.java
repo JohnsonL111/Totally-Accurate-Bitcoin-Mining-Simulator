@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.security.cert.PKIXRevocationChecker;
+
 import cmpt276.assignments.assignment3.MainActivity;
 import cmpt276.assignments.assignment3.R;
+import cmpt276.assignments.assignment3.model.Options;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -18,8 +21,19 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         setHelpButton();
+        setOptionsButton();
 
+    }
 
+    private void setOptionsButton() {
+        Button optionsBtn = findViewById(R.id.optionsBtn);
+        optionsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent optionsIntent = OptionsActivity.makeIntent(MainMenuActivity.this);
+                startActivity(optionsIntent);
+            }
+        });
     }
 
     // https://stackoverflow.com/questions/18404271/android-back-button-to-specific-activity
