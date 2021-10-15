@@ -57,6 +57,7 @@
             android:id="@+id/radio_group_num_mines"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
