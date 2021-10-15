@@ -11,13 +11,17 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import cmpt276.assignments.assignment3.R;
+import cmpt276.assignments.assignment3.model.OptionsManager;
 
 public class OptionsActivity extends AppCompatActivity {
+    private OptionsManager options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
+
+        options = OptionsManager.getInstance();
 
         setBoardSizeOptions();
         setNumMinesOptions();
@@ -31,28 +35,30 @@ public class OptionsActivity extends AppCompatActivity {
     private void setBoardSizeOptions() {
         RadioGroup boardSizeGroup = findViewById(R.id.radio_group_board_size);
 
-        int[] boardSizeX = getResources().getIntArray(R.array.board_size_x);
-        int[] boardSizeY = getResources().getIntArray(R.array.board_size_y);
+        int[] boardSizeXList = getResources().getIntArray(R.array.board_size_x);
+        int[] boardSizeYList = getResources().getIntArray(R.array.board_size_y);
 
-        for(int i = 0; i < boardSizeX.length; i++){
+        for(int i = 0; i < boardSizeXList.length; i++){
+            final int boardSizeX = boardSizeXList[i];
+            final int boardSizeY = boardSizeYList[i];
+
             RadioButton boardSizeBtn = new RadioButton(this);
             boardSizeBtn.setText(
-                    boardSizeX[i] + getString(R.string.rows) +
-                    boardSizeY[i] + getString(R.string.columns)
+                    boardSizeX + getString(R.string.rows) +
+                    boardSizeY + getString(R.string.columns)
             );
 
             // set options to singleton
             boardSizeGroup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    options.setBoardDimensionX(boardSizeX);
+                    options.setBoardDimensionY(boardSizeY);
                 }
             });
 
             boardSizeGroup.addView(boardSizeBtn);
         }
-
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -70,7 +76,7 @@ public class OptionsActivity extends AppCompatActivity {
             radioBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    options.setNumMines(numMines);
                 }
             });
 
