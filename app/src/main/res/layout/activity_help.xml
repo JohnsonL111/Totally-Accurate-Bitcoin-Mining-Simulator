@@ -4,6 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HelpActivity">
+    tools:context=".ui.HelpActivity"
+    android:autoLink="web"
+    >
 
+
+    <TextView
+        android:id="@+id/gameInfo"
+        android:layout_width="543dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/app_info"
+        app:layout_constraintBottom_toTopOf="@+id/authorInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/authorInfo"
+        android:layout_width="619dp"
+        android:layout_height="77dp"
+        android:layout_marginBottom="28dp"
+        android:text="@string/author_info"
+        app:layout_constraintBottom_toTopOf="@+id/resourcesInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/resourcesInfo"
+        android:layout_width="549dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="60dp"
+        android:text="@string/resources_info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
