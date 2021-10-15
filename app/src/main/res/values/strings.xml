@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">assignment3</string>
+    <string name="app_name">Assignment 3 - Bomb Finder</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="app_title">Assignment 3 - Bomb Finder</string>
+    <string name="app_authors">by Jerry Deng &amp; Johnson Luong</string>
+    <string name="helpBtn">Help</string>
+    <string name="gameBtn">Play Game</string>
+    <string name="optionsBtn">Options</string>
+    <string name="app_info">Bomb Finder \n
+                            This app is a sad copy of a knock-off version of Minesweeper, called Bomb Finder.
+    </string>
+    <string name="author_info">About the Authors \n Johnson and Jerry are two sleep deprived SFU CS students trying to make it through university.
+                                \n This application is developed towards an assignment for the course CMPT 276: Intro to Software Engineering
+                                 (<a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home" >https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home</a>)
+    </string>
+    <string name="resources_info">Resources \n images used..... idk </string>
+    <string name="num_mines_radio_button">" mines"</string>
+    <string name="board_size_title">Board Size:</string>
+    <string name="number_of_mine_title">Number of Mines:</string>
+    <string name="rows">" rows x "</string>
+    <string name="columns">" columns"</string>
 </resources>
