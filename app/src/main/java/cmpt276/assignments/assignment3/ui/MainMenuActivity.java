@@ -23,6 +23,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         setHelpButton();
         setOptionsButton();
+        setGameButton();
     }
 
     // https://stackoverflow.com/questions/18404271/android-back-button-to-specific-activity
@@ -55,6 +56,18 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(optionsIntent);
             }
         });
+    }
+
+    private void setGameButton() {
+        Button gameBtn = findViewById(R.id.gameBtn);
+        gameBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gameIntent = GameActivity.makeIntent(MainMenuActivity.this);
+                startActivity(gameIntent);
+            }
+        });
+
     }
 
     public static Intent makeIntent(Context context) {

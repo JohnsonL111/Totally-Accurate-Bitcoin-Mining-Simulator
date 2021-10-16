@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import cmpt276.assignments.assignment3.R;
 
+// Implements grid UI functionality.
+// Interacts with GameManager.java when a grid is clicked.
+// Citation: https://www.youtube.com/watch?v=4MFzuP1F-xQ (Brian Frasers Dynamic Button + images vid).
 public class GameActivity extends AppCompatActivity {
 
     // TODO: Make it so this is not hard-coded.

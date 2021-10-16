@@ -1,9 +1,9 @@
 package cmpt276.assignments.assignment3.model;
 
-
-// Implements grid UI functionality.
-// Citation: https://www.youtube.com/watch?v=4MFzuP1F-xQ (Brian Frasers Dynamic Button + images vid).
+// Comments for Guidance:
+// Singleton class with functionality:
+// (1) Handles which cells are bombs
+// (2) Getting number of bombs vertically/horizontally
 public class GameManager {
-
 
 }
