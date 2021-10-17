@@ -116,7 +116,7 @@ public class GameActivity extends AppCompatActivity {
             updateRowColText(row, col);
 
             // Display image.
-            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.action_lock_silver);
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bitcoin_logo);
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
@@ -160,7 +160,7 @@ public class GameActivity extends AppCompatActivity {
     private void updateMinesFoundText() {
         TextView minesFound = (TextView)findViewById(R.id.minesFound);
         minesFound.setText("Found " +  gameLogic.getNumOfMinesFound()
-                            + " of " + NUM_MINES);
+                            + " of " + NUM_MINES + " mines");
     }
 
     private void updateScansUsedText() {
