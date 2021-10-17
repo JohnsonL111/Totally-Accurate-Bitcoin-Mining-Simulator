@@ -35,7 +35,7 @@ public class GameManager {
         return gridCells;
     }
 
-    // TODO: This should set the rows and cols for GridCell (but for now hard code it)
+    // TODO: The constructor should also set the rows and cols for GridCell.
     public GameManager() {
 
         // Instantiate grid cell objects.

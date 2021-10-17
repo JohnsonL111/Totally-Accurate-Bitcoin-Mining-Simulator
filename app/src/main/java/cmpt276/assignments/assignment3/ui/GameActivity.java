@@ -1,8 +1,10 @@
 package cmpt276.assignments.assignment3.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -25,7 +27,7 @@ import cmpt276.assignments.assignment3.model.GridCell;
 // Citation: https://www.youtube.com/watch?v=4MFzuP1F-xQ (Brian Frasers Dynamic Button + images vid).
 public class GameActivity extends AppCompatActivity {
 
-    // TODO: Make it so this is not hard-coded.
+    // TODO: Make it so NUM_MINS/ROWS/COLS is not hard-coded.
     private static final int NUM_MINES = 6;
     private static final int NUM_ROWS = 4;
     private static final int NUM_COLS = 3;
@@ -49,7 +51,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void populateButtons() {
-        TableLayout table = (TableLayout)findViewById(R.id.tableForButtons);
+        TableLayout table = (TableLayout) findViewById(R.id.tableForButtons);
         for (int row = 0; row < NUM_ROWS; ++row) {
             TableRow tableRow = new TableRow(this);
 
@@ -71,10 +73,9 @@ public class GameActivity extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
-                button.setText("(" + row + "," + col + ")");
 
                 // Makes text not clip on smaller buttons
-                button.setPadding(0,0,0,0);
+                button.setPadding(0, 0, 0, 0);
 
                 // Implements On-Click functionality for grids.
                 button.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +126,7 @@ public class GameActivity extends AppCompatActivity {
             gameLogic.scan(row, col);
             clickedGrid.setScanned(true);
             button.setText("" + clickedGrid.getLocalMineCounter());
-        // Basic case for non-mine grid.
+            // Basic case for non-mine grid.
         } else {
             gameLogic.scan(row, col);
             button.setText("" + clickedGrid.getLocalMineCounter());
@@ -133,6 +134,27 @@ public class GameActivity extends AppCompatActivity {
 
         updateScansUsedText();
         updateMinesFoundText();
+        checkIfWin();
+    }
+
+    private void checkIfWin() {
+        // Displays winning message.
+        if (gameLogic.getNumOfMinesFound() == NUM_MINES) {
+            AlertDialog.Builder dialogWarning = new AlertDialog.Builder(GameActivity.this);
+            dialogWarning.setTitle("Congratulations!");
+            dialogWarning.setMessage("Good work on finding those bit coins :)");
+
+            dialogWarning.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // Switch back to main menu when you win.
+                    Intent mainMenuIntent = MainMenuActivity.makeIntent(GameActivity.this);
+                    startActivity(mainMenuIntent);
+                }
+            });
+            dialogWarning.show();
+
+        }
     }
 
     private void updateMinesFoundText() {
