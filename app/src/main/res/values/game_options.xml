@@ -7,16 +7,20 @@
         <item>20</item>
     </integer-array>
 
-    <integer-array name="board_size_x">
+    <integer-array name="board_list_x">
         <item>4</item>
         <item>5</item>
         <item>6</item>
     </integer-array>
 
-    <integer-array name="board_size_y">
+    <integer-array name="board_list_y">
         <item>6</item>
         <item>10</item>
         <item>15</item>
     </integer-array>
+
+    <integer name="default_num_mines">6</integer>
+    <integer name="default_dimension_x">4</integer>
+    <integer name="default_dimension_y">6</integer>
 
 </resources>
