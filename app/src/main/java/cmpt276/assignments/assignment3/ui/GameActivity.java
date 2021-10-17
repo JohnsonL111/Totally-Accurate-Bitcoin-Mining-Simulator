@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import cmpt276.assignments.assignment3.R;
@@ -25,6 +26,7 @@ import cmpt276.assignments.assignment3.model.GridCell;
 public class GameActivity extends AppCompatActivity {
 
     // TODO: Make it so this is not hard-coded.
+    private static final int NUM_MINES = 6;
     private static final int NUM_ROWS = 4;
     private static final int NUM_COLS = 3;
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
@@ -38,6 +40,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         populateButtons();
+        updateScansUsedText();
+        updateMinesFoundText();
     }
 
     public static Intent makeIntent(Context context) {
@@ -104,6 +108,11 @@ public class GameActivity extends AppCompatActivity {
         // Initial protocol for tapping unrevealed mine.
         if (clickedGrid.isMine() && !clickedGrid.isMineFound()) {
             clickedGrid.setMineFound(true);
+            gameLogic.IncrementNumOfMinesFound();
+
+            // Updates the rowCol values and updates corresponding UI.
+            gameLogic.updateRowColValues(row, col);
+            updateRowColText(row, col);
 
             // Display image.
             Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.action_lock_silver);
@@ -122,14 +131,26 @@ public class GameActivity extends AppCompatActivity {
             button.setText("" + clickedGrid.getLocalMineCounter());
         }
 
-        updateRowColText(row, col, clickedGrid);
+        updateScansUsedText();
+        updateMinesFoundText();
     }
 
-    private void updateRowColText(int row, int col, GridCell clickedGrid) {
+    private void updateMinesFoundText() {
+        TextView minesFound = (TextView)findViewById(R.id.minesFound);
+        minesFound.setText("Found " +  gameLogic.getNumOfMinesFound()
+                            + " of " + NUM_MINES);
+    }
+
+    private void updateScansUsedText() {
+        TextView scansUsed = (TextView)findViewById(R.id.scansUsed);
+        scansUsed.setText("Scans Used: " +  gameLogic.getNumOfScansDone());
+    }
+
+    private void updateRowColText(int row, int col) {
         // Updates text for grids in the same row as the clicked grid.
         for (int gridInCol = 0; gridInCol < NUM_COLS; ++gridInCol) {
             Button button = buttons[row][gridInCol];
-            GridCell gridToUpdate = gameGrid[row][col];
+            GridCell gridToUpdate = gameGrid[row][gridInCol];
 
             if (!gridToUpdate.isScanned()) {
                 continue;
@@ -140,7 +161,7 @@ public class GameActivity extends AppCompatActivity {
         // Updates text for grids in the same col as the clicked grid.
         for (int gridInRow = 0; gridInRow < NUM_ROWS; ++gridInRow) {
             Button button = buttons[gridInRow][col];
-            GridCell gridToUpdate = gameGrid[row][col];
+            GridCell gridToUpdate = gameGrid[gridInRow][col];
 
             if (!gridToUpdate.isScanned()) {
                 continue;

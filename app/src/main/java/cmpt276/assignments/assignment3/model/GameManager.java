@@ -15,11 +15,11 @@ public class GameManager {
     private int numOfScansDone = 0;
     private int numOfMinesFound = 0;
 
-    public void IncrementNumOfScansDone(int numOfScansDone) {
+    public void IncrementNumOfScansDone() {
         numOfScansDone++;
     }
 
-    public void IncrementNumOfMinesFound(int numOfMinesFound) {
+    public void IncrementNumOfMinesFound() {
         numOfMinesFound++;
     }
 
@@ -81,38 +81,45 @@ public class GameManager {
         }
 
         int numOfMine = 0;
+        IncrementNumOfScansDone();
 
         // Scans all grids in the row for num of bombs.
         for (int gridInCol = 0; gridInCol < NUM_COLS; ++gridInCol) {
             GridCell scannedGrid = gridCells[row][gridInCol];
 
-            // To avoid counting the clicked entry and already found mines.
-            if (gridInCol == col || scannedGrid.isMineFound()) {
+            // Guard to avoid counting the clicked entry and already found mines.
+            if (gridInCol == col) {
                 continue;
             }
 
-            // Decrement local mine counter in same row/col if clicked entry is a mine.
-            boolean isMine = scannedGrid.isMine();
-            if (isMine) {
-                scannedGrid.decrementLocalMineCounter();
+            // Update number of mines found.
+            if (scannedGrid.isMine() && !scannedGrid.isMineFound()) {
                 numOfMine++;
+            }
+
+            // Update mineCounter in its row.
+            if (gridToScan.isMine()) {
+                scannedGrid.decrementLocalMineCounter();
             }
         }
 
         // Scans all grids in the col for num of bombs.
         for (int gridInRow = 0; gridInRow < NUM_ROWS; ++gridInRow) {
-            GridCell scannedGrid = gridCells[row][gridInRow];
+            GridCell scannedGrid = gridCells[gridInRow][col];
 
-            // To avoid counting the clicked entry and already found mines.
-            if (gridInRow == col || scannedGrid.isMineFound()) {
+            // Guard to avoid counting the clicked entry and already found mines.
+            if (gridInRow == row) {
                 continue;
             }
 
-            // Decrement local mine counter in same row/col if clicked entry is a mine.
-            boolean isMine = scannedGrid.isMine();
-            if (isMine) {
-                scannedGrid.decrementLocalMineCounter();
+            // Update number of mines found.
+            if (scannedGrid.isMine() && !scannedGrid.isMineFound()) {
                 numOfMine++;
+            }
+
+            // Update mineCounter in its row.
+            if (gridToScan.isMine()) {
+                scannedGrid.decrementLocalMineCounter();
             }
         }
 
@@ -124,7 +131,39 @@ public class GameManager {
         return;
     }
 
-    private void updateRowColView(int row, int col) {
+    public void updateRowColValues(int row, int col) {
+        GridCell gridToScan = gridCells[row][col];
+
+        // Scans all grids in the row for num of bombs.
+        for (int gridInCol = 0; gridInCol < NUM_COLS; ++gridInCol) {
+            GridCell scannedGrid = gridCells[row][gridInCol];
+
+            // Guard to avoid counting the clicked entry and already found mines.
+            if (gridInCol == col) {
+                continue;
+            }
+
+            // Update mineCounter in its row.
+            if (gridToScan.isMine()) {
+                scannedGrid.decrementLocalMineCounter();
+            }
+        }
+
+        // Scans all grids in the col for num of bombs.
+        for (int gridInRow = 0; gridInRow < NUM_ROWS; ++gridInRow) {
+            GridCell scannedGrid = gridCells[gridInRow][col];
+
+            // Guard to avoid counting the clicked entry and already found mines.
+            if (gridInRow == row) {
+                continue;
+            }
+
+            // Update mineCounter in its row.
+            if (gridToScan.isMine()) {
+                scannedGrid.decrementLocalMineCounter();
+            }
+        }
 
     }
+
 }

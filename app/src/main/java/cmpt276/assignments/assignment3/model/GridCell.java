@@ -41,6 +41,8 @@ public class GridCell {
     }
 
     public void decrementLocalMineCounter () {
-        localMineCounter--;
+        if (localMineCounter != 0) {
+            localMineCounter--;
+        }
     }
 }
