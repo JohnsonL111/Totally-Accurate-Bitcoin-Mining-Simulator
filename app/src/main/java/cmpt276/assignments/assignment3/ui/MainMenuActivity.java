@@ -21,11 +21,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
         options = OptionsManager.getInstance();
 
-        // initialize default game values
-        options.setNumMines(OptionsActivity.getNumMines(this));
-        options.setBoardDimensionX(OptionsActivity.getBoardDimensionX(this));
-        options.setBoardDimensionY(OptionsActivity.getBoardDimensionY(this));
-
         setHelpButton();
         setOptionsButton();
         setGameButton();
@@ -72,6 +67,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(gameIntent);
             }
         });
+
     }
 
     public static Intent makeIntent(Context context) {
