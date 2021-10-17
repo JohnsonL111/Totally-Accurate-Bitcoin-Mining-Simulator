@@ -16,6 +16,8 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import cmpt276.assignments.assignment3.R;
+import cmpt276.assignments.assignment3.model.GameManager;
+import cmpt276.assignments.assignment3.model.GridCell;
 
 // Implements grid UI functionality.
 // Interacts with GameManager.java when a grid is clicked.
@@ -23,10 +25,12 @@ import cmpt276.assignments.assignment3.R;
 public class GameActivity extends AppCompatActivity {
 
     // TODO: Make it so this is not hard-coded.
-    private static final int NUM_ROWS = 7;
-    private static final int NUM_COLS = 10;
-
+    private static final int NUM_ROWS = 4;
+    private static final int NUM_COLS = 3;
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
+    GameManager gameLogic = new GameManager();
+    GridCell gameGrid[][] = gameLogic.getGridCells();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +76,7 @@ public class GameActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        gridButtonClicked(FINAL_COL, FINAL_ROW);
+                        gridButtonClicked(FINAL_ROW, FINAL_COL);
                     }
                 });
                 tableRow.addView(button);
@@ -81,26 +85,68 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void gridButtonClicked(int col, int row) {
-        Toast.makeText(this, "Button clicked at (" + col + "," + row + ")",
-                Toast.LENGTH_SHORT).show();
+    private void gridButtonClicked(int row, int col) {
 
-        Button button = buttons[row][col];
+        GridCell clickedGrid = gameGrid[row][col];
 
-        // Lock button sizes.
         lockButtonSizes();
+        updateGridUI(row, col, clickedGrid);
+    }
+
+    private void updateGridUI(int row, int col, GridCell clickedGrid) {
+        // Sets variables for game button.
+        Button button = buttons[row][col];
 
         // Scale image to button on-click.
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.action_lock_silver);
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
-        Resources resource = getResources();
-        button.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
-        // Change text on button click.
-        button.setText("" + col);
+        // Initial protocol for tapping unrevealed mine.
+        if (clickedGrid.isMine() && !clickedGrid.isMineFound()) {
+            clickedGrid.setMineFound(true);
 
+            // Display image.
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.action_lock_silver);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+            Resources resource = getResources();
+            button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+        }
+        // Initial Scan on revealed mine.
+        else if (!clickedGrid.isScanned() && clickedGrid.isMineFound()) {
+            gameLogic.scan(row, col);
+            clickedGrid.setScanned(true);
+            button.setText("" + clickedGrid.getLocalMineCounter());
+        // Basic case for non-mine grid.
+        } else {
+            gameLogic.scan(row, col);
+            button.setText("" + clickedGrid.getLocalMineCounter());
+        }
+
+        updateRowColText(row, col, clickedGrid);
+    }
+
+    private void updateRowColText(int row, int col, GridCell clickedGrid) {
+        // Updates text for grids in the same row as the clicked grid.
+        for (int gridInCol = 0; gridInCol < NUM_COLS; ++gridInCol) {
+            Button button = buttons[row][gridInCol];
+            GridCell gridToUpdate = gameGrid[row][col];
+
+            if (!gridToUpdate.isScanned()) {
+                continue;
+            }
+            button.setText("" + gridToUpdate.getLocalMineCounter());
+        }
+
+        // Updates text for grids in the same col as the clicked grid.
+        for (int gridInRow = 0; gridInRow < NUM_ROWS; ++gridInRow) {
+            Button button = buttons[gridInRow][col];
+            GridCell gridToUpdate = gameGrid[row][col];
+
+            if (!gridToUpdate.isScanned()) {
+                continue;
+            }
+            button.setText("" + gridToUpdate.getLocalMineCounter());
+        }
     }
 
     private void lockButtonSizes() {

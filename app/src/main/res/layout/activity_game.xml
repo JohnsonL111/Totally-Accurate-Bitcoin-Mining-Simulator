@@ -15,11 +15,35 @@
     <TableLayout
         android:id="@+id/tableForButtons"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="547dp"
         android:layout_below="@+id/textView1"
         android:layout_alignLeft="@+id/textView1"
-        android:layout_marginTop="0dp"
-        android:stretchColumns="*">
-    </TableLayout>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="-4dp"
+        android:stretchColumns="*"></TableLayout>
+
+    <TextView
+        android:id="@+id/minesFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="27dp"
+        android:text="Found x of y mines" />
+
+    <TextView
+        android:id="@+id/scansUsed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="14dp"
+        android:text="# Scans used: z" />
 
 </RelativeLayout>
