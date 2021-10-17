@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/techbackground"
     tools:context=".MainActivity">
 
     <TextView
@@ -24,7 +25,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="-4dp"
-        android:stretchColumns="*"></TableLayout>
+        android:stretchColumns="*" />
 
     <TextView
         android:id="@+id/minesFound"

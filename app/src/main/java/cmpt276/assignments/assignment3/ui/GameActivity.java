@@ -16,34 +16,40 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import cmpt276.assignments.assignment3.R;
 import cmpt276.assignments.assignment3.model.GameManager;
 import cmpt276.assignments.assignment3.model.GridCell;
+import cmpt276.assignments.assignment3.model.OptionsManager;
 
 // Implements grid UI functionality.
 // Interacts with GameManager.java when a grid is clicked.
 // Citation: https://www.youtube.com/watch?v=4MFzuP1F-xQ (Brian Frasers Dynamic Button + images vid).
 public class GameActivity extends AppCompatActivity {
 
-    // TODO: Make it so NUM_MINS/ROWS/COLS is not hard-coded.
-    private static final int NUM_MINES = 6;
-    private static final int NUM_ROWS = 4;
-    private static final int NUM_COLS = 3;
-    Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
-    GameManager gameLogic = new GameManager();
-    GridCell gameGrid[][] = gameLogic.getGridCells();
-
+    private OptionsManager options;
+    private GameManager gameLogic;
+    private Button[][] buttons;
+    private GridCell[][] gameGrid;
+    private int numMines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        options = OptionsManager.getInstance();
 
+        setUpGrid(options.getBoardDimensionX(), options.getGetBoardDimensionY(), options.getNumMines());
         populateButtons();
         updateScansUsedText();
         updateMinesFoundText();
+    }
+
+    private void setUpGrid(final int dimX, final int dimY, int numMines) {
+        this.numMines = numMines;
+        buttons = new Button[dimX][dimY];
+        gameLogic = new GameManager();
+        gameGrid = gameLogic.getGridCells();
     }
 
     public static Intent makeIntent(Context context) {
@@ -52,7 +58,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void populateButtons() {
         TableLayout table = (TableLayout) findViewById(R.id.tableForButtons);
-        for (int row = 0; row < NUM_ROWS; ++row) {
+        for (int row = 0; row < options.getBoardDimensionX(); ++row) {
             TableRow tableRow = new TableRow(this);
 
             // Set scaling layout for tableRow view.
@@ -62,7 +68,7 @@ public class GameActivity extends AppCompatActivity {
                     1.0f));
 
             table.addView(tableRow);
-            for (int col = 0; col < NUM_COLS; ++col) {
+            for (int col = 0; col < options.getGetBoardDimensionY(); ++col) {
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
@@ -91,7 +97,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int row, int col) {
-
         GridCell clickedGrid = gameGrid[row][col];
 
         lockButtonSizes();
@@ -116,7 +121,7 @@ public class GameActivity extends AppCompatActivity {
             updateRowColText(row, col);
 
             // Display image.
-            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.action_lock_silver);
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bitcoin_logo);
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
@@ -139,7 +144,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void checkIfWin() {
         // Displays winning message.
-        if (gameLogic.getNumOfMinesFound() == NUM_MINES) {
+        if (gameLogic.getNumOfMinesFound() == numMines) {
             AlertDialog.Builder dialogWarning = new AlertDialog.Builder(GameActivity.this);
             dialogWarning.setTitle("Congratulations!");
             dialogWarning.setMessage("Good work on finding those bit coins :)");
@@ -160,7 +165,7 @@ public class GameActivity extends AppCompatActivity {
     private void updateMinesFoundText() {
         TextView minesFound = (TextView)findViewById(R.id.minesFound);
         minesFound.setText("Found " +  gameLogic.getNumOfMinesFound()
-                            + " of " + NUM_MINES);
+                            + " of " + numMines);
     }
 
     private void updateScansUsedText() {
@@ -170,7 +175,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void updateRowColText(int row, int col) {
         // Updates text for grids in the same row as the clicked grid.
-        for (int gridInCol = 0; gridInCol < NUM_COLS; ++gridInCol) {
+        for (int gridInCol = 0; gridInCol < options.getGetBoardDimensionY(); ++gridInCol) {
             Button button = buttons[row][gridInCol];
             GridCell gridToUpdate = gameGrid[row][gridInCol];
 
@@ -181,7 +186,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         // Updates text for grids in the same col as the clicked grid.
-        for (int gridInRow = 0; gridInRow < NUM_ROWS; ++gridInRow) {
+        for (int gridInRow = 0; gridInRow < options.getBoardDimensionX(); ++gridInRow) {
             Button button = buttons[gridInRow][col];
             GridCell gridToUpdate = gameGrid[gridInRow][col];
 
@@ -193,8 +198,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void lockButtonSizes() {
-        for (int row = 0; row < NUM_ROWS; ++row) {
-            for (int col = 0; col < NUM_COLS; ++col) {
+        for (int row = 0; row < options.getBoardDimensionX(); ++row) {
+            for (int col = 0; col < options.getGetBoardDimensionY(); ++col) {
                 Button button = buttons[row][col];
 
                 // Prevents the image width from re-scaling.
