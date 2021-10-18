@@ -49,6 +49,8 @@
     <string name="scans_used_z"># Scans used: z</string>
     <string name="total_games_update">"Total Games: "</string>
     <string name="best_score_update">"Best Score: "</string>
+    <string name="winnerMsg">Good work on finding those bit coins, here is a free bit coin for you :).</string>
+    <string name="congratsText">Congratulations!</string>
 </resources>
 
     <!--

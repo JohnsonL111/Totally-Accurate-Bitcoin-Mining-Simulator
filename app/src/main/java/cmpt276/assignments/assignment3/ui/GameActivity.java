@@ -13,6 +13,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -57,7 +58,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void populateButtons() {
-        TableLayout table = (TableLayout) findViewById(R.id.tableForButtons);
+        TableLayout table = findViewById(R.id.tableForButtons);
         for (int row = 0; row < options.getBoardDimensionX(); ++row) {
             TableRow tableRow = new TableRow(this);
 
@@ -130,11 +131,11 @@ public class GameActivity extends AppCompatActivity {
         else if (!clickedGrid.isScanned() && clickedGrid.isMineFound()) {
             gameLogic.scan(row, col);
             clickedGrid.setScanned(true);
-            button.setText("" + clickedGrid.getLocalMineCounter());
+            button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
             // Basic case for non-mine grid.
         } else {
             gameLogic.scan(row, col);
-            button.setText("" + clickedGrid.getLocalMineCounter());
+            button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
         }
 
         updateScansUsedText();
@@ -143,32 +144,36 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void checkIfWin() {
+
+        ImageView congratsImg = new ImageView(this);
+        congratsImg.setImageResource(R.drawable.bitcoin_logo);
+
         // Displays winning message.
         if (gameLogic.getNumOfMinesFound() == numMines) {
             AlertDialog.Builder winDialog = new AlertDialog.Builder(GameActivity.this);
-            winDialog.setTitle("Congratulations!");
-            winDialog.setMessage("Good work on finding those bit coins :)");
+            winDialog.setTitle(R.string.congratsText);
+            winDialog.setMessage(R.string.winnerMsg);
             winDialog.setCancelable(false);
             winDialog.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     finish();
                 }
-            });
-            winDialog.show();
+            }).setView(congratsImg);
 
+            winDialog.show();
         }
     }
 
     // TODO reformat setText, extract strings
     private void updateMinesFoundText() {
-        TextView minesFound = (TextView)findViewById(R.id.minesFound);
+        TextView minesFound = findViewById(R.id.minesFound);
         minesFound.setText(getString(R.string.num_bitcoin_display_text_1) +  gameLogic.getNumOfMinesFound()
                             + getString(R.string.num_bitcoin_display_text_2) + numMines + getString(R.string.num_bitcoin_display_text_3));
     }
 
     private void updateScansUsedText() {
-        TextView scansUsed = (TextView)findViewById(R.id.scansUsed);
+        TextView scansUsed = findViewById(R.id.scansUsed);
         scansUsed.setText(getString(R.string.num_attempted_scans) +  gameLogic.getNumOfScansDone());
     }
 
@@ -181,7 +186,7 @@ public class GameActivity extends AppCompatActivity {
             if (!gridToUpdate.isScanned()) {
                 continue;
             }
-            button.setText("" + gridToUpdate.getLocalMineCounter());
+            button.setText(String.valueOf(gridToUpdate.getLocalMineCounter()));
         }
 
         // Updates text for grids in the same col as the clicked grid.
@@ -192,7 +197,7 @@ public class GameActivity extends AppCompatActivity {
             if (!gridToUpdate.isScanned()) {
                 continue;
             }
-            button.setText("" + gridToUpdate.getLocalMineCounter());
+            button.setText(String.valueOf(gridToUpdate.getLocalMineCounter()));
         }
     }
 
