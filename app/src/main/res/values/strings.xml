@@ -36,14 +36,25 @@
 \n https://wallpapersafari.com/cyber-wallpapers/
     </string>
     <string name="num_mines_radio_button">" mines"</string>
-    <string name="board_size_title">Board Size:</string>
-    <string name="number_of_mine_title">Number of Mines:</string>
+    <string name="board_size_title"><b>Board Size:</b></string>
+    <string name="number_of_mine_title"><b>Number of Bitcoins:</b></string>
     <string name="rows">" rows x "</string>
     <string name="columns">" columns"</string>
     <string name="num_bitcoin_display_text_1">"Found "</string>
     <string name="num_bitcoin_display_text_2">" of "</string>
     <string name="num_bitcoin_display_text_3">" Bitcoins"</string>
-    <string name="num_attempted_scans">"# Attempted Hashes (Scans): "</string>
+    <string name="num_attempted_scans"><b>"# Attempted Hashes (Scans): "</b></string>
+    <string name="total_games">Total Games: t</string>
+    <string name="best_score">Best Score: s</string>
+    <string name="found_x_of_y_mines">Found x of y mines</string>
+    <string name="scans_used_z"># Scans used: z</string>
+    <string name="total_games_update">"Total Games: "</string>
+    <string name="best_score_update">"Best Score: "</string>
+    <string name="reset_all_data">Clear All Data</string>
+    <string name="clear_games_played_amp_high_scores">Clear # Games Played &amp; High Scores</string>
+    <string name="options"><b>Options</b></string>
+    <string name="not_applicable">" n/a"</string>
+
 </resources>
 
 

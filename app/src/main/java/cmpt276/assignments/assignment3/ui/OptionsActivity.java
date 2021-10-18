@@ -15,10 +15,11 @@ import cmpt276.assignments.assignment3.R;
 import cmpt276.assignments.assignment3.model.OptionsManager;
 
 public class OptionsActivity extends AppCompatActivity {
-    public static final String BOARD_SIZE_X_PREFS = "BoardSizeXPrefs";
-    public static final String BOARD_SIZE_Y_PREFS = "BoardSizeYPrefs";
-    public static final String APP_PREFS = "AppPrefs";
-    public static final String NUM_MINES_PREFS = "NumberOfMinesPrefs";
+    protected static final String BOARD_SIZE_X_PREFS = "BoardSizeXPrefs";
+    protected static final String BOARD_SIZE_Y_PREFS = "BoardSizeYPrefs";
+    protected static final String APP_PREFS = "AppPrefs";
+    protected static final String NUM_MINES_PREFS = "NumberOfMinesPrefs";
+
     private OptionsManager options;
 
     @Override
@@ -103,7 +104,6 @@ public class OptionsActivity extends AppCompatActivity {
         int[] minesList = getResources().getIntArray(R.array.num_mines);
 
         // create the buttons
-//        for (final int numMines : minesList) {
         for (final int numMines : minesList) {
             RadioButton numMinesBtn = new RadioButton(this);
             numMinesBtn.setText(numMines + getString(R.string.num_mines_radio_button));
@@ -136,8 +136,11 @@ public class OptionsActivity extends AppCompatActivity {
 
     static public int getNumMines(Context context){
         SharedPreferences boardSizePrefs = context.getSharedPreferences(APP_PREFS, MODE_PRIVATE);
-
         int defaultMines = context.getResources().getInteger(R.integer.default_num_mines);
+
         return boardSizePrefs.getInt(NUM_MINES_PREFS, defaultMines);
     }
+
+
+
 }

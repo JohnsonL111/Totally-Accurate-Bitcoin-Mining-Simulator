@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -25,8 +27,9 @@ import cmpt276.assignments.assignment3.model.OptionsManager;
 // Implements grid UI functionality.
 // Interacts with GameManager.java when a grid is clicked.
 // Citation: https://www.youtube.com/watch?v=4MFzuP1F-xQ (Brian Fraser's Dynamic Button + images vid).
+// set text to bold
+// https://stackoverflow.com/questions/6200533/how-to-set-textview-textstyle-such-as-bold-italic
 public class GameActivity extends AppCompatActivity {
-
     private OptionsManager options;
     private GameManager gameLogic;
     private Button[][] buttons;
@@ -39,10 +42,30 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         options = OptionsManager.getInstance();
 
-        setUpGrid(options.getBoardDimensionX(), options.getGetBoardDimensionY(), options.getNumMines());
+        setUpGrid(options.getBoardDimensionX(), options.getBoardDimensionY(), options.getNumMines());
         populateButtons();
         updateScansUsedText();
         updateMinesFoundText();
+        setGameDataText();
+    }
+
+    private void setGameDataText(){
+        TextView totalGames = findViewById(R.id.total_games_played);
+        totalGames.setText(getResources().getString(R.string.total_games_update)
+                        + " " + options.getTotalGames()
+                );
+        totalGames.setTypeface(null, Typeface.BOLD);
+
+        TextView bestScore = findViewById(R.id.best_score);
+        if(options.getBestScore() == getResources().getInteger(R.integer.no_best_score)){
+            bestScore.setText(getResources().getString(R.string.best_score_update)
+                    + getString(R.string.not_applicable));
+        }else{
+            bestScore.setText(getResources().getString(R.string.best_score_update)
+                    + " " + options.getBestScore());
+        }
+
+        bestScore.setTypeface(null, Typeface.BOLD);
     }
 
     private void setUpGrid(final int dimX, final int dimY, int numMines) {
@@ -57,7 +80,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void populateButtons() {
-        TableLayout table = (TableLayout) findViewById(R.id.tableForButtons);
+        TableLayout table = findViewById(R.id.tableForButtons);
         for (int row = 0; row < options.getBoardDimensionX(); ++row) {
             TableRow tableRow = new TableRow(this);
 
@@ -68,7 +91,7 @@ public class GameActivity extends AppCompatActivity {
                     1.0f));
 
             table.addView(tableRow);
-            for (int col = 0; col < options.getGetBoardDimensionY(); ++col) {
+            for (int col = 0; col < options.getBoardDimensionY(); ++col) {
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
 
@@ -147,34 +170,47 @@ public class GameActivity extends AppCompatActivity {
         if (gameLogic.getNumOfMinesFound() == numMines) {
             AlertDialog.Builder dialogWarning = new AlertDialog.Builder(GameActivity.this);
             dialogWarning.setTitle("Congratulations!");
-            dialogWarning.setMessage("Good work on finding those bit coins :)");
+            dialogWarning.setMessage("Good work on mining all those Bitcoins!");
 
             dialogWarning.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    int numGames = options.getTotalGames();
+                    saveTotalGames(++numGames);
+                    determineBestScore(gameLogic.getNumOfScansDone());
                     finish();
                 }
             });
             dialogWarning.show();
-
         }
     }
 
-    // TODO reformat setText, extract strings
+    private void determineBestScore(int currentScore){
+        int bestScore = options.getBestScore();
+
+        if (bestScore == getResources().getInteger(R.integer.no_best_score)){
+            saveGameConfigScore(currentScore, options.getTempKey());
+        }else if (bestScore > currentScore){
+            saveGameConfigScore(currentScore, options.getTempKey());
+        }
+    }
+
     private void updateMinesFoundText() {
-        TextView minesFound = (TextView)findViewById(R.id.minesFound);
+        TextView minesFound = findViewById(R.id.minesFound);
         minesFound.setText(getString(R.string.num_bitcoin_display_text_1) +  gameLogic.getNumOfMinesFound()
                             + getString(R.string.num_bitcoin_display_text_2) + numMines + getString(R.string.num_bitcoin_display_text_3));
+        minesFound.setTypeface(null, Typeface.BOLD);
     }
 
     private void updateScansUsedText() {
-        TextView scansUsed = (TextView)findViewById(R.id.scansUsed);
-        scansUsed.setText(getString(R.string.num_attempted_scans) +  gameLogic.getNumOfScansDone());
+        TextView scansUsed = findViewById(R.id.scansUsed);
+        scansUsed.setText(getString(R.string.num_attempted_scans) + gameLogic.getNumOfScansDone());
+        scansUsed.setTypeface(null, Typeface.BOLD);
     }
 
     private void updateRowColText(int row, int col) {
         // Updates text for grids in the same row as the clicked grid.
-        for (int gridInCol = 0; gridInCol < options.getGetBoardDimensionY(); ++gridInCol) {
+        for (int gridInCol = 0; gridInCol < options.getBoardDimensionY(); ++gridInCol) {
             Button button = buttons[row][gridInCol];
             GridCell gridToUpdate = gameGrid[row][gridInCol];
 
@@ -198,7 +234,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void lockButtonSizes() {
         for (int row = 0; row < options.getBoardDimensionX(); ++row) {
-            for (int col = 0; col < options.getGetBoardDimensionY(); ++col) {
+            for (int col = 0; col < options.getBoardDimensionY(); ++col) {
                 Button button = buttons[row][col];
 
                 // Prevents the image width from re-scaling.
@@ -214,6 +250,35 @@ public class GameActivity extends AppCompatActivity {
                 button.setMaxHeight(height);
             }
         }
+    }
+
+    private void saveTotalGames(int numGames){
+        SharedPreferences prefs = this.getSharedPreferences(OptionsManager.getGameData(), MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(OptionsManager.getTotalGamesKey(), numGames);
+        editor.apply();
+
+        System.out.println(getTotalGames(this));
+    }
+
+    static public int getTotalGames(Context context){
+        SharedPreferences prefs = context.getSharedPreferences(OptionsManager.getGameData(), MODE_PRIVATE);
+        int noGames = context.getResources().getInteger(R.integer.initial_total_games);
+
+        return prefs.getInt(OptionsManager.getTotalGamesKey(),noGames);
+    }
+
+    private void saveGameConfigScore(int bestScore, final String key){
+        SharedPreferences prefs = this.getSharedPreferences(OptionsManager.getGameData(), MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(key, bestScore);
+        editor.apply();
+    }
+
+    static public int getGameConfigScore(Context context, final String key){
+        SharedPreferences prefs = context.getSharedPreferences(OptionsManager.getGameData(), MODE_PRIVATE);
+        int noScore = context.getResources().getInteger(R.integer.no_best_score);
+        return prefs.getInt(key,noScore);
     }
 
 }
