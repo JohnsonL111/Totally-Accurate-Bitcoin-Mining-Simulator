@@ -22,5 +22,7 @@
     <integer name="default_num_mines">6</integer>
     <integer name="default_dimension_x">4</integer>
     <integer name="default_dimension_y">6</integer>
+    <integer name="initial_total_games">0</integer>
+    <integer name="no_best_score">-1</integer>
 
 </resources>

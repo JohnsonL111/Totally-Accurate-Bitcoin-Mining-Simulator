@@ -35,8 +35,8 @@
  \n\nThis application is developed towards an assignment for the course CMPT 276: Intro to Software Engineering
     </string>
     <string name="num_mines_radio_button">" mines"</string>
-    <string name="board_size_title">Board Size:</string>
-    <string name="number_of_mine_title">Number of Mines:</string>
+    <string name="board_size_title"><b>Board Size:</b></string>
+    <string name="number_of_mine_title"><b>Number of Bitcoins:</b></string>
     <string name="rows">" rows x "</string>
     <string name="columns">" columns"</string>
     <string name="num_bitcoin_display_text_1">"Found "</string>
@@ -49,21 +49,12 @@
     <string name="scans_used_z"># Scans used: z</string>
     <string name="total_games_update">"Total Games: "</string>
     <string name="best_score_update">"Best Score: "</string>
+    <string name="reset_all_data">Clear All Data</string>
+    <string name="clear_games_played_amp_high_scores">Clear # Games Played &amp; High Scores</string>
+    <string name="options"><b>Options</b></string>
+    <string name="not_applicable">" n/a"</string>
     <string name="winnerMsg">Good work on finding those bit coins, here is a free bit coin for you :).</string>
     <string name="congratsText">Congratulations!</string>
 </resources>
-
-    <!--
-    \nThere are 3 basic objects:
-
-    \n[unscanned block image] ⇒ A “block”. This represents a potentially unmined block on the blockchain. Click on this to “hash”/uncover the block.
-
-    \n[bitcoin image] ⇒ A Bitcoin. You wan’t to find this, unless.. ?
-
-    \n[scanned empty image] ⇒  An empty block. This represents a block that contains no Bitcoin, because it’s already been, figuratively, mined by someone else !
-
-
-
-    -->
 
 
