@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
@@ -17,9 +18,17 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        // https://stackoverflow.com/questions/1748977/making-textview-scrollable-on-android
-        TextView helpDescription = findViewById(R.id.helpDescription);
-        helpDescription.setMovementMethod(new ScrollingMovementMethod());
+        // Sets the hyperlink functionality.
+        TextView courseTextView = findViewById(R.id.courseInfo);
+        TextView gridImgTextView = findViewById(R.id.gridImgLink);
+        TextView bitCoinImgTextView = findViewById(R.id.bitCoinLogoLink);
+        TextView cyberBGTextView = findViewById(R.id.cyberBGLink);
+
+        courseTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        gridImgTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        bitCoinImgTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        cyberBGTextView.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
     public static Intent makeIntent(Context context) {
