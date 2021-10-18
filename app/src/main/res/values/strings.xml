@@ -40,19 +40,10 @@
     <string name="number_of_mine_title">Number of Mines:</string>
     <string name="rows">" rows x "</string>
     <string name="columns">" columns"</string>
+    <string name="num_bitcoin_display_text_1">"Found "</string>
+    <string name="num_bitcoin_display_text_2">" of "</string>
+    <string name="num_bitcoin_display_text_3">" Bitcoins"</string>
+    <string name="num_attempted_scans">"# Attempted Hashes (Scans): "</string>
 </resources>
-
-<!--
-\nThere are 3 basic objects:
-
-\n[unscanned block image] ⇒ A “block”. This represents a potentially unmined block on the blockchain. Click on this to “hash”/uncover the block.
-
-\n[bitcoin image] ⇒ A Bitcoin. You wan’t to find this, unless.. ?
-
-\n[scanned empty image] ⇒  An empty block. This represents a block that contains no Bitcoin, because it’s already been, figuratively, mined by someone else !
-
-
-
--->
 
 

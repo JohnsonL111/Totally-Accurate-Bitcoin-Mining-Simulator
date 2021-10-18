@@ -1,6 +1,5 @@
 package cmpt276.assignments.assignment3.model;
 
-import java.security.cert.PKIXRevocationChecker;
 import java.util.Random;
 
 // Handles Game Functionality like:
@@ -8,10 +7,9 @@ import java.util.Random;
 // (2) Getting number of mine vertically/horizontally (scan).
 // (3) Dynamically updating mine counts in row/col when a new mine  is found.
 public class GameManager {
-    private static OptionsManager options;
-    private static int NUM_MINES;
-    private static int NUM_ROWS;
-    private static int NUM_COLS;
+    private final int NUM_MINES;
+    private final int NUM_ROWS;
+    private final int NUM_COLS;
     private static GridCell[][] gridCells;
     private int numOfScansDone = 0;
     private int numOfMinesFound = 0;
@@ -36,41 +34,44 @@ public class GameManager {
         return gridCells;
     }
 
-    public GameManager() {
-        options = OptionsManager.getInstance();
-        NUM_MINES = options.getInstance().getNumMines();
-        NUM_ROWS = options.getInstance().getBoardDimensionX();
-        NUM_COLS = options.getInstance().getGetBoardDimensionY();
+    public GameManager(int dimX, int dimY, int numMines) {
+        NUM_MINES = numMines;
+        NUM_ROWS = dimX;
+        NUM_COLS = dimY;
         gridCells = new GridCell[NUM_ROWS][NUM_COLS];
 
-        // Instantiate grid cell objects.
+        fillGrid();
+        setMineCords();
+    }
+
+    // Instantiate grid cell objects.
+    private void fillGrid(){
         for (int row = 0; row < NUM_ROWS; ++row) {
             for (int col = 0; col < NUM_COLS; ++col) {
                 gridCells[row][col] = new GridCell(false, false, false);
             }
         }
-        setMineCords();
     }
 
     public void setMineCords() {
-        int i = 0;
+        int numGeneratedMines = 0;
 
-        while (i < NUM_MINES) {
-            int row = genRandomVal(NUM_ROWS);
-            int col = genRandomVal(NUM_COLS);
+        while (numGeneratedMines < NUM_MINES) {
+            int row = getRandomValue(NUM_ROWS);
+            int col = getRandomValue(NUM_COLS);
 
             GridCell grid = gridCells[row][col];
 
             // Only set the mine if it is not already a mine.
             if (!grid.isMine()) {
                 grid.setMine(true);
-                ++i;
+                numGeneratedMines++;
             }
         }
     }
 
     // For generating mine locations.
-    public int genRandomVal(int upperBound) {
+    public int getRandomValue(int upperBound) {
         Random rand = new Random();
         return rand.nextInt(upperBound);
     }
@@ -132,7 +133,6 @@ public class GameManager {
         }
 
         gridToScan.setLocalMineCounter(numOfMine);
-        return;
     }
 
     public void updateRowColValues(int row, int col) {
