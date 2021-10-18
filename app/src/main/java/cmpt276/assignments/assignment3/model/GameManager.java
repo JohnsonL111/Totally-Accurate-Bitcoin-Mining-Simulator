@@ -1,17 +1,18 @@
 package cmpt276.assignments.assignment3.model;
 
+import java.security.cert.PKIXRevocationChecker;
 import java.util.Random;
 
-// Comments for Guidance:
-// Singleton class with functionality:
-// (1) Handles which cells are bombs (sets the bomb grids?)
-// (2) Getting number of bombs vertically/horizontally (scan)
+// Handles Game Functionality like:
+// (1) Handles which cells are bombs (sets the bomb grids).
+// (2) Getting number of mine vertically/horizontally (scan).
+// (3) Dynamically updating mine counts in row/col when a new mine  is found.
 public class GameManager {
-    // TODO: These will be passed via options in final version
-    private static final int NUM_MINES = 6;
-    private static final int NUM_ROWS = 4;
-    private static final int NUM_COLS = 3;
-    private static GridCell[][] gridCells = new GridCell[NUM_ROWS][NUM_COLS]; // 2D array of grids (hard-coded for now)
+    private static OptionsManager options;
+    private static int NUM_MINES;
+    private static int NUM_ROWS;
+    private static int NUM_COLS;
+    private static GridCell[][] gridCells;
     private int numOfScansDone = 0;
     private int numOfMinesFound = 0;
 
@@ -35,8 +36,12 @@ public class GameManager {
         return gridCells;
     }
 
-    // TODO: The constructor should also set the rows and cols for GridCell.
     public GameManager() {
+        options = OptionsManager.getInstance();
+        NUM_MINES = options.getInstance().getNumMines();
+        NUM_ROWS = options.getInstance().getBoardDimensionX();
+        NUM_COLS = options.getInstance().getGetBoardDimensionY();
+        gridCells = new GridCell[NUM_ROWS][NUM_COLS];
 
         // Instantiate grid cell objects.
         for (int row = 0; row < NUM_ROWS; ++row) {
@@ -44,7 +49,6 @@ public class GameManager {
                 gridCells[row][col] = new GridCell(false, false, false);
             }
         }
-
         setMineCords();
     }
 
@@ -87,7 +91,7 @@ public class GameManager {
         for (int gridInCol = 0; gridInCol < NUM_COLS; ++gridInCol) {
             GridCell scannedGrid = gridCells[row][gridInCol];
 
-            // Guard to avoid counting the clicked entry and already found mines.
+            // Guard to avoid counting the clicked entry
             if (gridInCol == col) {
                 continue;
             }
@@ -107,7 +111,7 @@ public class GameManager {
         for (int gridInRow = 0; gridInRow < NUM_ROWS; ++gridInRow) {
             GridCell scannedGrid = gridCells[gridInRow][col];
 
-            // Guard to avoid counting the clicked entry and already found mines.
+            // Guard to avoid counting the clicked entry
             if (gridInRow == row) {
                 continue;
             }
@@ -138,7 +142,7 @@ public class GameManager {
         for (int gridInCol = 0; gridInCol < NUM_COLS; ++gridInCol) {
             GridCell scannedGrid = gridCells[row][gridInCol];
 
-            // Guard to avoid counting the clicked entry and already found mines.
+            // Guard to avoid counting the clicked entry
             if (gridInCol == col) {
                 continue;
             }
@@ -153,7 +157,7 @@ public class GameManager {
         for (int gridInRow = 0; gridInRow < NUM_ROWS; ++gridInRow) {
             GridCell scannedGrid = gridCells[gridInRow][col];
 
-            // Guard to avoid counting the clicked entry and already found mines.
+            // Guard to avoid counting the clicked entry
             if (gridInRow == row) {
                 continue;
             }
