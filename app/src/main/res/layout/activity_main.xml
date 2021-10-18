@@ -11,8 +11,8 @@
 
     <Button
         android:id="@+id/menuBtn"
-        android:layout_width="94dp"
-        android:layout_height="48dp"
+        android:layout_width="109dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/main_menu"
@@ -21,25 +21,25 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="424dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="387dp"
+        android:layout_height="120dp"
         android:text="@string/app_title"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/authors"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.058" />
 
     <TextView
         android:id="@+id/authors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/app_authors"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
