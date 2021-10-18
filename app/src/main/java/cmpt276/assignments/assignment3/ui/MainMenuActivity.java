@@ -33,13 +33,6 @@ public class MainMenuActivity extends AppCompatActivity {
         setGameButton();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-    }
-
     // https://stackoverflow.com/questions/18404271/android-back-button-to-specific-activity
     @Override
     public void onBackPressed() {
