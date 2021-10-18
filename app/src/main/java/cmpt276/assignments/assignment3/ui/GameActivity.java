@@ -31,7 +31,7 @@ public class GameActivity extends AppCompatActivity {
     private GameManager gameLogic;
     private Button[][] buttons;
     private GridCell[][] gameGrid;
-    private int numMines;
+    private static int numMines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setUpGrid(final int dimX, final int dimY, int numMines) {
-        this.numMines = numMines;
+        this.numMines = options.getNumMines();
         buttons = new Button[dimX][dimY];
         gameLogic = new GameManager();
         gameGrid = gameLogic.getGridCells();
@@ -165,12 +165,12 @@ public class GameActivity extends AppCompatActivity {
     private void updateMinesFoundText() {
         TextView minesFound = (TextView)findViewById(R.id.minesFound);
         minesFound.setText("Found " +  gameLogic.getNumOfMinesFound()
-                            + " of " + numMines);
+                            + " of " + numMines + " bitcoins");
     }
 
     private void updateScansUsedText() {
         TextView scansUsed = (TextView)findViewById(R.id.scansUsed);
-        scansUsed.setText("Scans Used: " +  gameLogic.getNumOfScansDone());
+        scansUsed.setText("Hashes (scans) Used: " +  gameLogic.getNumOfScansDone());
     }
 
     private void updateRowColText(int row, int col) {
