@@ -22,12 +22,22 @@ public class MainMenuActivity extends AppCompatActivity {
         options = OptionsManager.getInstance();
 
         options.setNumMines(getResources().getInteger(R.integer.default_num_mines));
+        System.out.println("set default mines");
         options.setBoardDimensionX(getResources().getInteger(R.integer.default_dimension_x));
+        System.out.println("set default dimension x");
         options.setBoardDimensionY(getResources().getInteger(R.integer.default_dimension_y));
+        System.out.println("set default dimension y");
 
         setHelpButton();
         setOptionsButton();
         setGameButton();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 
     // https://stackoverflow.com/questions/18404271/android-back-button-to-specific-activity
