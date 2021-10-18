@@ -15,6 +15,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -153,11 +155,11 @@ public class GameActivity extends AppCompatActivity {
         else if (!clickedGrid.isScanned() && clickedGrid.isMineFound()) {
             gameLogic.scan(row, col);
             clickedGrid.setScanned(true);
-            button.setText("" + clickedGrid.getLocalMineCounter());
+            button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
             // Basic case for non-mine grid.
         } else {
             gameLogic.scan(row, col);
-            button.setText("" + clickedGrid.getLocalMineCounter());
+            button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
         }
 
         updateScansUsedText();
@@ -166,31 +168,35 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void checkIfWin() {
+
+        ImageView congratsImg = new ImageView(this);
+        congratsImg.setImageResource(R.drawable.bitcoin_logo);
+
         // Displays winning message.
         if (gameLogic.getNumOfMinesFound() == numMines) {
-            AlertDialog.Builder dialogWarning = new AlertDialog.Builder(GameActivity.this);
-            dialogWarning.setTitle("Congratulations!");
-            dialogWarning.setMessage("Good work on mining all those Bitcoins!");
-
-            dialogWarning.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+            AlertDialog.Builder winDialog = new AlertDialog.Builder(GameActivity.this);
+            winDialog.setTitle(R.string.congratsText);
+            winDialog.setMessage(R.string.winnerMsg);
+            winDialog.setCancelable(false);
+            winDialog.setNegativeButton("Ok",new DialogInterface.OnClickListener(){
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+                public void onClick (DialogInterface dialogInterface, int i){
                     int numGames = options.getTotalGames();
                     saveTotalGames(++numGames);
                     determineBestScore(gameLogic.getNumOfScansDone());
                     finish();
                 }
-            });
-            dialogWarning.show();
+            }).setView(congratsImg);
+            winDialog.show();
         }
     }
 
     private void determineBestScore(int currentScore){
         int bestScore = options.getBestScore();
 
-        if (bestScore == getResources().getInteger(R.integer.no_best_score)){
+        if (bestScore == getResources().getInteger(R.integer.no_best_score)) {
             saveGameConfigScore(currentScore, options.getTempKey());
-        }else if (bestScore > currentScore){
+        } else if (bestScore > currentScore) {
             saveGameConfigScore(currentScore, options.getTempKey());
         }
     }
@@ -217,7 +223,7 @@ public class GameActivity extends AppCompatActivity {
             if (!gridToUpdate.isScanned()) {
                 continue;
             }
-            button.setText("" + gridToUpdate.getLocalMineCounter());
+            button.setText(String.valueOf(gridToUpdate.getLocalMineCounter()));
         }
 
         // Updates text for grids in the same col as the clicked grid.
@@ -228,7 +234,7 @@ public class GameActivity extends AppCompatActivity {
             if (!gridToUpdate.isScanned()) {
                 continue;
             }
-            button.setText("" + gridToUpdate.getLocalMineCounter());
+            button.setText(String.valueOf(gridToUpdate.getLocalMineCounter()));
         }
     }
 
