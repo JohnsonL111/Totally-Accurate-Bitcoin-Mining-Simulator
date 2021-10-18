@@ -145,11 +145,11 @@ public class GameActivity extends AppCompatActivity {
     private void checkIfWin() {
         // Displays winning message.
         if (gameLogic.getNumOfMinesFound() == numMines) {
-            AlertDialog.Builder dialogWarning = new AlertDialog.Builder(GameActivity.this);
-            dialogWarning.setTitle("Congratulations!");
-            dialogWarning.setMessage("Good work on finding those bit coins :)");
-
-            dialogWarning.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+            AlertDialog.Builder winDialog = new AlertDialog.Builder(GameActivity.this);
+            winDialog.setTitle("Congratulations!");
+            winDialog.setMessage("Good work on finding those bit coins :)");
+            winDialog.setCancelable(false);
+            winDialog.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     // Switch back to main menu when you win.
@@ -157,7 +157,7 @@ public class GameActivity extends AppCompatActivity {
                     startActivity(mainMenuIntent);
                 }
             });
-            dialogWarning.show();
+            winDialog.show();
 
         }
     }

@@ -2,20 +2,68 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resourceTitle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:autoLink="web"
     android:background="@drawable/techbackground"
     tools:context=".ui.HelpActivity">
 
-    <TextView
-        android:id="@+id/helpDescription"
-        android:layout_width="620dp"
-        android:layout_height="267dp"
-        android:scrollbars="vertical"
-        android:text="@string/help_info"
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/gameBasics"
+                android:layout_width="match_parent"
+                android:layout_height="254dp"
+                android:text="@string/gameBasics" />
+
+            <TextView
+                android:id="@+id/authorInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/authorInfo" />
+
+            <TextView
+                android:id="@+id/courseInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/courseInfo" />
+
+            <TextView
+                android:id="@+id/resourcesUsed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/resourcesUsed" />
+
+            <TextView
+                android:id="@+id/gridImgLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gridImgLink" />
+
+            <TextView
+                android:id="@+id/bitCoinLogoLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bitCoinLogoLink" />
+
+            <TextView
+                android:id="@+id/cyberBGLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cyberBGLink" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
