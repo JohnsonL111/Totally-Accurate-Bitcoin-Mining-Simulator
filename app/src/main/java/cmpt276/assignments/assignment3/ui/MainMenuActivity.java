@@ -21,6 +21,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         options = OptionsManager.getInstance();
 
+        // initialize default dimensions
         options.setNumMines(getResources().getInteger(R.integer.default_num_mines));
         options.setBoardDimensionX(getResources().getInteger(R.integer.default_dimension_x));
         options.setBoardDimensionY(getResources().getInteger(R.integer.default_dimension_y));

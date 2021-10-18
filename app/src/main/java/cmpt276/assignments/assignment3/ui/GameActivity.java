@@ -24,14 +24,14 @@ import cmpt276.assignments.assignment3.model.OptionsManager;
 
 // Implements grid UI functionality.
 // Interacts with GameManager.java when a grid is clicked.
-// Citation: https://www.youtube.com/watch?v=4MFzuP1F-xQ (Brian Frasers Dynamic Button + images vid).
+// Citation: https://www.youtube.com/watch?v=4MFzuP1F-xQ (Brian Fraser's Dynamic Button + images vid).
 public class GameActivity extends AppCompatActivity {
 
     private OptionsManager options;
     private GameManager gameLogic;
     private Button[][] buttons;
     private GridCell[][] gameGrid;
-    private static int numMines;
+    private int numMines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class GameActivity extends AppCompatActivity {
     private void setUpGrid(final int dimX, final int dimY, int numMines) {
         this.numMines = options.getNumMines();
         buttons = new Button[dimX][dimY];
-        gameLogic = new GameManager();
+        gameLogic = new GameManager(dimX, dimY, numMines);
         gameGrid = gameLogic.getGridCells();
     }
 
@@ -152,9 +152,7 @@ public class GameActivity extends AppCompatActivity {
             winDialog.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    // Switch back to main menu when you win.
-                    Intent mainMenuIntent = MainMenuActivity.makeIntent(GameActivity.this);
-                    startActivity(mainMenuIntent);
+                    finish();
                 }
             });
             winDialog.show();
@@ -162,15 +160,16 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    // TODO reformat setText, extract strings
     private void updateMinesFoundText() {
         TextView minesFound = (TextView)findViewById(R.id.minesFound);
-        minesFound.setText("Found " +  gameLogic.getNumOfMinesFound()
-                            + " of " + numMines + " bitcoins");
+        minesFound.setText(getString(R.string.num_bitcoin_display_text_1) +  gameLogic.getNumOfMinesFound()
+                            + getString(R.string.num_bitcoin_display_text_2) + numMines + getString(R.string.num_bitcoin_display_text_3));
     }
 
     private void updateScansUsedText() {
         TextView scansUsed = (TextView)findViewById(R.id.scansUsed);
-        scansUsed.setText("Hashes (scans) Used: " +  gameLogic.getNumOfScansDone());
+        scansUsed.setText(getString(R.string.num_attempted_scans) +  gameLogic.getNumOfScansDone());
     }
 
     private void updateRowColText(int row, int col) {
