@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import cmpt276.assignments.assignment3.R;
 import cmpt276.assignments.assignment3.model.GameManager;
-import cmpt276.assignments.assignment3.model.GridCell;
+import cmpt276.assignments.assignment3.model.Block;
 import cmpt276.assignments.assignment3.model.OptionsManager;
 
 // Implements grid UI functionality.
@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
     private OptionsManager options;
     private GameManager gameLogic;
     private Button[][] buttons; // the ui grid
-    private GridCell[][] gameGrid; // the logic grid
+    private Block[][] gameGrid; // the logic grid
     private int numMines;
     private boolean isInitiallyRevealed = true;
 
@@ -151,20 +151,20 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int row, int col) {
-        GridCell clickedGrid = gameGrid[row][col];
+        Block clickedGrid = gameGrid[row][col];
 
         lockButtonSizes();
         updateGridUI(row, col, clickedGrid);
     }
 
-    private void updateGridUI(int row, int col, GridCell clickedGrid) {
+    private void updateGridUI(int row, int col, Block clickedGrid) {
         // Sets variables for game button.
         Button button = buttons[row][col];
 
         // Initial protocol for tapping unrevealed bitcoin.
-        if (clickedGrid.isMine() && !clickedGrid.isMineFound()) {
+        if (clickedGrid.isBitcoin() && !clickedGrid.isMineFound()) {
             clickedGrid.setMineFound(true);
-            gameLogic.IncrementNumOfMinesFound();
+            gameLogic.IncrementNumBitcoinFound();
 
             // Updates the rowCol values and updates corresponding UI.
             gameLogic.updateRowColValues(row, col);
@@ -184,7 +184,7 @@ public class GameActivity extends AppCompatActivity {
             button.setTextColor(ContextCompat.getColor(this, R.color.black));
 
             // Initial scan on block with no bitcoin
-        } else if (!clickedGrid.isScanned() && !clickedGrid.isMine()) {
+        } else if (!clickedGrid.isScanned() && !clickedGrid.isBitcoin()) {
             gameLogic.scan(row, col);
             button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
             button.setTypeface(null, Typeface.BOLD);
@@ -226,7 +226,7 @@ public class GameActivity extends AppCompatActivity {
         ImageView congratsImg = new ImageView(this);
         congratsImg.setImageResource(R.drawable.bitcoin_logo);
 
-        if (gameLogic.getNumOfMinesFound() == numMines) {
+        if (gameLogic.getNumBitcoinFound() == numMines) {
 
             // update game data
             updateTotalGames();
@@ -265,7 +265,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void updateMinesFoundText() {
         TextView minesFound = findViewById(R.id.minesFound);
-        minesFound.setText(getString(R.string.num_bitcoin_display_text_1) +  gameLogic.getNumOfMinesFound()
+        minesFound.setText(getString(R.string.num_bitcoin_display_text_1) +  gameLogic.getNumBitcoinFound()
                             + getString(R.string.num_bitcoin_display_text_2) + numMines + getString(R.string.num_bitcoin_display_text_3));
         minesFound.setTypeface(null, Typeface.BOLD);
         minesFound.setTextColor(ContextCompat.getColor(this, R.color.white));
@@ -283,7 +283,7 @@ public class GameActivity extends AppCompatActivity {
         // Updates text for grids in the same row as the clicked grid.
         for (int gridInCol = 0; gridInCol < options.getBoardDimensionY(); ++gridInCol) {
             Button button = buttons[row][gridInCol];
-            GridCell gridToUpdate = gameGrid[row][gridInCol];
+            Block gridToUpdate = gameGrid[row][gridInCol];
 
             if (!gridToUpdate.isScanned()) {
                 continue;
@@ -294,7 +294,7 @@ public class GameActivity extends AppCompatActivity {
         // Updates text for grids in the same col as the clicked grid.
         for (int gridInRow = 0; gridInRow < options.getBoardDimensionX(); ++gridInRow) {
             Button button = buttons[gridInRow][col];
-            GridCell gridToUpdate = gameGrid[gridInRow][col];
+            Block gridToUpdate = gameGrid[gridInRow][col];
 
             if (!gridToUpdate.isScanned()) {
                 continue;
