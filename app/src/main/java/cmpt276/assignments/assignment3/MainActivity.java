@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -43,18 +45,32 @@ public class MainActivity extends AppCompatActivity {
 
     private void beginAnimations(ImageView bitCoin, ImageView gridBlock1, ImageView gridBlock2) {
         bitCoinAnimation(bitCoin);
-        gridBlockAnimation(gridBlock1);
-        gridBlockAnimation(gridBlock2);
+        gridBlockAnimation(gridBlock1, gridBlock2);
     }
 
-    private void gridBlockAnimation(ImageView gridBlock) {
-        Animation gridBlockRot = AnimationUtils.loadAnimation(getApplicationContext(),
+    private void gridBlockAnimation(ImageView gridBlock1, ImageView gridBlock2) {
+        Animation blockTiltRight = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.rotation_animation);
-        gridBlock.startAnimation(gridBlockRot);
+        Animation blockTiltLeft = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.rotation_animation_2);
+        gridBlock1.startAnimation(blockTiltRight);
+        gridBlock2.startAnimation(blockTiltLeft);
 
         // Tracks when the animation finishes and switches to main menu activity
         // 4 seconds after animation is done.
-        gridBlockRot.setAnimationListener(new Animation.AnimationListener() {
+        blockTiltLeft.setAnimationListener(new Animation.AnimationListener() {
+            public void onAnimationStart(Animation animation) {
+            }
+
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            public void onAnimationEnd(Animation animation) {
+                waitFourSeconds();
+            }
+        });
+
+        blockTiltRight.setAnimationListener(new Animation.AnimationListener() {
             public void onAnimationStart(Animation animation) {
             }
 
@@ -68,20 +84,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void bitCoinAnimation(ImageView bitCoin) {
-        // Set animation for bitcoin.
-        final int bitCoinDuration = 10000;
-        // Citation: http://android-coding.blogspot.com/2015/10/interactive-flip-imageview-using.html
-        // Although our code is very different, we still found some inspiration from it.
+        final int bitCoinDuration = 5000;
+        // Modified from: http://android-coding.blogspot.com/2015/10/interactive-flip-imageview-using.html
+        // https://stackoverflow.com/questions/32641150/how-to-make-imageview-constantly-spin
         ObjectAnimator flip = ObjectAnimator.ofFloat(bitCoin, "rotationY", -360f, 360f);
+        flip.setInterpolator(new LinearInterpolator());
         flip.setDuration(bitCoinDuration);
+        flip.setRepeatCount(2);
         flip.start();
     }
 
     private void setMenuButton() {
         Button menuBtn = findViewById(R.id.menuBtn);
         menuBtn.setOnClickListener(view -> {
-
-            // make intent to launch HelpActivity
             Intent helpIntent = MainMenuActivity.makeIntent(MainActivity.this);
             startActivity(helpIntent);
         });
