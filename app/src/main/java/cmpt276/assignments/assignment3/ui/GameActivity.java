@@ -2,6 +2,7 @@ package cmpt276.assignments.assignment3.ui;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,12 +17,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import cmpt276.assignments.assignment3.R;
 import cmpt276.assignments.assignment3.model.GameManager;
@@ -36,9 +34,10 @@ import cmpt276.assignments.assignment3.model.OptionsManager;
 public class GameActivity extends AppCompatActivity {
     private OptionsManager options;
     private GameManager gameLogic;
-    private Button[][] buttons;
-    private GridCell[][] gameGrid;
+    private Button[][] buttons; // the ui grid
+    private GridCell[][] gameGrid; // the logic grid
     private int numMines;
+    private boolean isInitiallyRevealed = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +50,29 @@ public class GameActivity extends AppCompatActivity {
         updateScansUsedText();
         updateMinesFoundText();
         setGameDataText();
+    }
+
+    // https://stackoverflow.com/questions/7750102/how-to-get-height-and-width-of-button
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        /*
+            update initial buttons to image of un-scanned block
+            after button sizes have been set by UI for viewing
+            setting it earlier will cause a crash as button sizes are 0
+
+            isInitiallyRevealed -> to prevent onWindowFocusChanged to set grid images
+            to be un-scanned after the first window focus when starting GameActivity
+         */
+        if(hasFocus && isInitiallyRevealed){
+            for (int i = 0; i < options.getBoardDimensionX(); i++) {
+                for (int j = 0; j < options.getBoardDimensionY(); j++) {
+                    setButtonImage(buttons[i][j], "Un-scanned Block");
+                }
+            }
+            isInitiallyRevealed = false;
+        }
     }
 
     private void setGameDataText(){
@@ -119,6 +141,7 @@ public class GameActivity extends AppCompatActivity {
                         gridButtonClicked(FINAL_ROW, FINAL_COL);
                     }
                 });
+
                 tableRow.addView(button);
                 buttons[row][col] = button;
             }
@@ -136,10 +159,6 @@ public class GameActivity extends AppCompatActivity {
         // Sets variables for game button.
         Button button = buttons[row][col];
 
-        // Scale image to button on-click.
-        int newWidth = button.getWidth();
-        int newHeight = button.getHeight();
-
         // Initial protocol for tapping unrevealed mine.
         if (clickedGrid.isMine() && !clickedGrid.isMineFound()) {
             clickedGrid.setMineFound(true);
@@ -150,25 +169,53 @@ public class GameActivity extends AppCompatActivity {
             updateRowColText(row, col);
 
             // Display image.
-            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bitcoin_logo);
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
-            Resources resource = getResources();
-            button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            setButtonImage(button, "Scanned Bitcoin Block");
         }
         // Initial Scan on revealed mine.
         else if (!clickedGrid.isScanned() && clickedGrid.isMineFound()) {
             gameLogic.scan(row, col);
             clickedGrid.setScanned(true);
             button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
-            // Basic case for non-mine grid.
-        } else {
+            button.setTypeface(null, Typeface.BOLD);
+
+            // https://stackoverflow.com/questions/31842983/getresources-getcolor-is-deprecated
+            button.setTextColor(ContextCompat.getColor(this, R.color.black));
+
+        } else { // Basic case for non-mine grid.
             gameLogic.scan(row, col);
             button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
+            button.setTypeface(null, Typeface.BOLD);
+            button.setTextColor(ContextCompat.getColor(this, R.color.black));
+            setButtonImage(button, "Scanned Empty Block");
         }
 
         updateScansUsedText();
         updateMinesFoundText();
         checkIfWin();
+    }
+
+    private void setButtonImage(Button button, String buttonImageType) {
+        // Scale image to button on-click.
+        int newWidth = button.getWidth();
+        int newHeight = button.getHeight();
+
+        Bitmap originalBitmap = null;
+
+        switch (buttonImageType) {
+            case "Un-scanned Block":
+                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.unscanned_block);
+                break;
+            case "Scanned Empty Block":
+                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.empty_block);
+                break;
+            case "Scanned Bitcoin Block":
+                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bitcoin_block);
+                break;
+        }
+
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+        Resources resource = getResources();
+        button.setBackground(new BitmapDrawable(resource, scaledBitmap));
     }
 
     private void checkIfWin() {
