@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -31,6 +32,28 @@ public class OptionsActivity extends AppCompatActivity {
 
         setNumMinesOptionsBtn();
         setBoardSizeOptionsBtn();
+        setResetBtn();
+    }
+
+    // https://developer.android.com/reference/android/content/SharedPreferences.Editor#remove(java.lang.String)
+    private void setResetBtn() {
+        Button clear = findViewById(R.id.resetButton);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int noScore = getResources().getInteger(R.integer.no_best_score);
+                int noGames = getResources().getInteger(R.integer.initial_total_games);
+                options.setBestScore(noScore);
+                options.setTotalGames(noGames);
+
+                // remove shared preferences corresponding to GAME_DATA key
+                SharedPreferences prefs = getSharedPreferences(OptionsManager.getGameData(), MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.clear();
+                editor.apply();
+            }
+        });
+
     }
 
     public static Intent makeIntent(Context context) {
@@ -140,7 +163,4 @@ public class OptionsActivity extends AppCompatActivity {
 
         return boardSizePrefs.getInt(NUM_MINES_PREFS, defaultMines);
     }
-
-
-
 }

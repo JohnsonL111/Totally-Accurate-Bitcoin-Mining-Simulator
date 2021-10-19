@@ -35,7 +35,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     private void updateGameData() {
-        options.setTotalGames(GameActivity.getTotalGames(this));
+        // updating options data
         options.setNumMines(OptionsActivity.getNumMines(this));
         options.setBoardDimensionY(OptionsActivity.getBoardDimensionY(this));
         options.setBoardDimensionX(OptionsActivity.getBoardDimensionX(this));
@@ -45,8 +45,10 @@ public class MainMenuActivity extends AppCompatActivity {
                 + "x" + options.getBoardDimensionY()
                 + "-" + options.getNumMines();
 
+        // updating game data
         options.setTempKey(key);
         options.setBestScore(GameActivity.getGameConfigScore(this, key));
+        options.setTotalGames(GameActivity.getTotalGames(this));
     }
 
     // https://stackoverflow.com/questions/18404271/android-back-button-to-specific-activity

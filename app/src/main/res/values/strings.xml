@@ -10,14 +10,14 @@
     <string name = "helpBtn">Help</string>
     <string name = "gameBtn">Play Game</string>
     <string name = "optionsBtn">Options</string>
-    <string name = "bitCoinLogoLink"> <a href="https://freebiesupply.com/logos/bitcoin-logo/"> Link to bitcoin logo </a></string>
-    <string name = "gridImgLink"> <a href="https://www.figma.com/file/pDBTKDXzDK6oZYA0oRJEZo/block?node-id=3%3A5"> Link to grid design UI </a> </string>
-    <string name = "cyberBGLink" > <a href="https://wallpapersafari.com/cyber-wallpapers/" > Link to cyber wallpaper</a> </string>
-    <string name = "resourcesUsed"> <b> Resources: </b> </string>
-    <string name = "courseInfo"> <a href = "https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home"> link to course page </a> </string>
+    <string name = "bitCoinLogoLink">" • "<a href="https://freebiesupply.com/logos/bitcoin-logo/">Link to bitcoin logo</a></string>
+    <string name = "gridImgLink">" • "<a href="https://www.figma.com/file/pDBTKDXzDK6oZYA0oRJEZo/block?node-id=3%3A5">Link to grid design UI</a></string>
+    <string name = "cyberBGLink">" • "<a href="https://wallpapersafari.com/cyber-wallpapers/" >Link to cyber wallpaper</a></string>
+    <string name = "resourcesUsed"><b>\nResources: </b> </string>
+    <string name = "courseInfo">" • "<a href = "https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">link to course page</a></string>
     <string name = "gameBasics">
 
-\n\n<b>Game Basics:</b>
+\n<b>Game Basics:</b>
         \n\"Totally Accurate ₿itcoin Mining Simulator\” is a knock-off version of the famous “Minesweeper” game.
         The game consists of a grid of "blocks" and hidden Bitcoins to be uncovered.
 
@@ -30,12 +30,12 @@
         Tapping on already scanned empty blocks or already scanned revealed Bitcoins will not initiate another scan.
     </string>
 
-    <string name = "authorInfo"> "<b>About The Author:</b>
+    <string name = "authorInfo"> "<b>\nAbout The Author:</b>
 \nJohnson and Jerry are two sleep deprived and functionally depressed 2nd year SFU CS &amp; SoSy students trying to make it through university.
  \n\nThis application is developed towards an assignment for the course CMPT 276: Intro to Software Engineering
     </string>
-    <string name="num_mines_radio_button">" mines"</string>
-    <string name="board_size_title"><b>Board Size:</b></string>
+    <string name="num_mines_radio_button">" bitcoins"</string>
+    <string name="board_size_title"><b>Blockchain Size:</b></string>
     <string name="number_of_mine_title"><b>Number of Bitcoins:</b></string>
     <string name="rows">" rows x "</string>
     <string name="columns">" columns"</string>
@@ -50,11 +50,12 @@
     <string name="total_games_update">"Total Games: "</string>
     <string name="best_score_update">"Best Score: "</string>
     <string name="reset_all_data">Clear All Data</string>
-    <string name="clear_games_played_amp_high_scores">Clear # Games Played &amp; High Scores</string>
+    <string name="clear_games_played_amp_high_scores">Clear # Games Played &amp; Best Scores</string>
     <string name="options"><b>Options</b></string>
     <string name="not_applicable">" n/a"</string>
-    <string name="winnerMsg">Good work on finding those bit coins, here is a free bit coin for you :).</string>
+    <string name="winnerMsg">Good work on mining all those bitcoins, here\'s a free bitcoin for you 🎉.</string>
     <string name="congratsText">Congratulations!</string>
+    <string name="help_title"><b>Help</b></string>
 </resources>
 
 
