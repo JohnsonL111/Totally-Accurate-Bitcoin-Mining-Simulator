@@ -21,6 +21,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import cmpt276.assignments.assignment3.R;
 import cmpt276.assignments.assignment3.model.GameManager;
 import cmpt276.assignments.assignment3.model.GridCell;
@@ -52,12 +54,14 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setGameDataText(){
+        // update total games
         TextView totalGames = findViewById(R.id.total_games_played);
         totalGames.setText(getResources().getString(R.string.total_games_update)
                         + " " + options.getTotalGames()
                 );
         totalGames.setTypeface(null, Typeface.BOLD);
 
+        // update best score
         TextView bestScore = findViewById(R.id.best_score);
         if(options.getBestScore() == getResources().getInteger(R.integer.no_best_score)){
             bestScore.setText(getResources().getString(R.string.best_score_update)
@@ -172,8 +176,15 @@ public class GameActivity extends AppCompatActivity {
         ImageView congratsImg = new ImageView(this);
         congratsImg.setImageResource(R.drawable.bitcoin_logo);
 
-        // Displays winning message.
+
         if (gameLogic.getNumOfMinesFound() == numMines) {
+
+            // update game data
+            updateTotalGames();
+            updateBestScore(gameLogic.getNumOfScansDone());
+            setGameDataText();
+
+            // display winning message
             AlertDialog.Builder winDialog = new AlertDialog.Builder(GameActivity.this);
             winDialog.setTitle(R.string.congratsText);
             winDialog.setMessage(R.string.winnerMsg);
@@ -181,9 +192,6 @@ public class GameActivity extends AppCompatActivity {
             winDialog.setNegativeButton("Ok",new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick (DialogInterface dialogInterface, int i){
-                    int numGames = options.getTotalGames();
-                    saveTotalGames(++numGames);
-                    determineBestScore(gameLogic.getNumOfScansDone());
                     finish();
                 }
             }).setView(congratsImg);
@@ -191,13 +199,18 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void determineBestScore(int currentScore){
+    private void updateTotalGames() {
+        int numGames = options.getTotalGames();
+        saveTotalGames(++numGames);
+        options.setTotalGames(numGames);
+    }
+
+    private void updateBestScore(int currentScore){
         int bestScore = options.getBestScore();
 
-        if (bestScore == getResources().getInteger(R.integer.no_best_score)) {
+        if (bestScore == getResources().getInteger(R.integer.no_best_score) || bestScore > currentScore) {
             saveGameConfigScore(currentScore, options.getTempKey());
-        } else if (bestScore > currentScore) {
-            saveGameConfigScore(currentScore, options.getTempKey());
+            options.setBestScore(currentScore);
         }
     }
 
