@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/techbackground"
     tools:context=".MainActivity"
-    tools:layout_editor_absoluteX="-16dp"
-    tools:layout_editor_absoluteY="-15dp">
+    tools:layout_editor_absoluteX="-5dp"
+    tools:layout_editor_absoluteY="-317dp">
 
     <Button
         android:id="@+id/menuBtn"
@@ -42,5 +42,38 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/bitCoinImg"
+        android:layout_width="121dp"
+        android:layout_height="121dp"
+        android:layout_marginStart="240dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.501"
+        app:srcCompat="@drawable/bitcoin_logo" />
+
+    <ImageView
+        android:id="@+id/gridBlock1"
+        android:layout_width="121dp"
+        android:layout_height="121dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bitCoinImg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.501"
+        app:srcCompat="@drawable/unscanned_block" />
+
+    <ImageView
+        android:id="@+id/gridBlock2"
+        android:layout_width="121dp"
+        android:layout_height="121dp"
+        android:layout_marginStart="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bitCoinImg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.501"
+        app:srcCompat="@drawable/unscanned_block" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
