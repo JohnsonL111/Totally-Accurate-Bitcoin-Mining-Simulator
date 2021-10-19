@@ -159,7 +159,7 @@ public class GameActivity extends AppCompatActivity {
         // Sets variables for game button.
         Button button = buttons[row][col];
 
-        // Initial protocol for tapping unrevealed mine.
+        // Initial protocol for tapping unrevealed bitcoin.
         if (clickedGrid.isMine() && !clickedGrid.isMineFound()) {
             clickedGrid.setMineFound(true);
             gameLogic.IncrementNumOfMinesFound();
@@ -171,7 +171,7 @@ public class GameActivity extends AppCompatActivity {
             // Display image.
             setButtonImage(button, "Scanned Bitcoin Block");
         }
-        // Initial Scan on revealed mine.
+        // Initial Scan on revealed bitcoin.
         else if (!clickedGrid.isScanned() && clickedGrid.isMineFound()) {
             gameLogic.scan(row, col);
             clickedGrid.setScanned(true);
@@ -179,13 +179,14 @@ public class GameActivity extends AppCompatActivity {
             button.setTypeface(null, Typeface.BOLD);
 
             // https://stackoverflow.com/questions/31842983/getresources-getcolor-is-deprecated
-            button.setTextColor(ContextCompat.getColor(this, R.color.black));
+            button.setTextColor(ContextCompat.getColor(this, R.color.royal_blue));
 
-        } else { // Basic case for non-mine grid.
+            // Initial scan on block with no bitcoin
+        } else if (!clickedGrid.isScanned() && !clickedGrid.isMine()) {
             gameLogic.scan(row, col);
             button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
             button.setTypeface(null, Typeface.BOLD);
-            button.setTextColor(ContextCompat.getColor(this, R.color.black));
+            button.setTextColor(ContextCompat.getColor(this, R.color.white));
             setButtonImage(button, "Scanned Empty Block");
         }
 
