@@ -20,10 +20,12 @@
         app:layout_constraintVertical_bias="0.372">
 
         <TextView
-            android:id="@+id/boardSizeTitle"
+            android:id="@+id/blockchainSizeTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/board_size_title" />
+            android:text="@string/blockchain_size_title"
+            android:textColor="@color/white"
+            />
 
         <RadioGroup
             android:id="@+id/radio_group_board_size"
@@ -56,12 +58,15 @@
             android:id="@+id/numMinesTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/number_of_mine_title" />
+            android:text="@string/number_of_bitcoins_title"
+            android:textColor="@color/white"
+            />
 
         <RadioGroup
             android:id="@+id/radio_group_num_mines"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
 
     </LinearLayout>
 
@@ -83,6 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/clear_games_played_amp_high_scores"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/resetButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -96,6 +102,7 @@
         android:layout_height="wrap_content"
         android:text="@string/options"
         android:textSize="28sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.236"

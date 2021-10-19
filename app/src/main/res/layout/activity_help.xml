@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:text="@string/help_title"
         android:textSize="28sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.088"
@@ -41,24 +42,28 @@
                 android:id="@+id/gameBasics"
                 android:layout_width="match_parent"
                 android:layout_height="254dp"
+                android:textColor="@color/white"
                 android:text="@string/gameBasics" />
 
             <TextView
                 android:id="@+id/authorInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/authorInfo" />
 
             <TextView
                 android:id="@+id/courseInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/courseInfo" />
 
             <TextView
                 android:id="@+id/resourcesUsed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/resourcesUsed" />
 
             <TextView

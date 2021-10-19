@@ -25,6 +25,7 @@
         android:layout_height="120dp"
         android:text="@string/app_title"
         android:textSize="32sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
@@ -40,6 +41,7 @@
         android:layout_marginBottom="16dp"
         android:text="@string/app_authors"
         android:textSize="16sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -47,33 +49,33 @@
         android:id="@+id/bitCoinImg"
         android:layout_width="121dp"
         android:layout_height="121dp"
-        android:layout_marginStart="240dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501"
+        app:layout_constraintVertical_bias="0.558"
         app:srcCompat="@drawable/bitcoin_logo" />
-
-    <ImageView
-        android:id="@+id/gridBlock1"
-        android:layout_width="121dp"
-        android:layout_height="121dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bitCoinImg"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501"
-        app:srcCompat="@drawable/unscanned_block" />
 
     <ImageView
         android:id="@+id/gridBlock2"
         android:layout_width="121dp"
         android:layout_height="121dp"
-        android:layout_marginStart="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bitCoinImg"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501"
+        app:layout_constraintVertical_bias="0.558"
+        app:srcCompat="@drawable/unscanned_block" />
+
+    <ImageView
+        android:id="@+id/gridBlock1"
+        android:layout_width="121dp"
+        android:layout_height="121dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bitCoinImg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.558"
         app:srcCompat="@drawable/unscanned_block" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

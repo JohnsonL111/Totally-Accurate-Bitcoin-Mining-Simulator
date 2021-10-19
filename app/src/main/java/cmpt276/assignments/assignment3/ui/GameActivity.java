@@ -82,6 +82,7 @@ public class GameActivity extends AppCompatActivity {
                         + " " + options.getTotalGames()
                 );
         totalGames.setTypeface(null, Typeface.BOLD);
+        totalGames.setTextColor(ContextCompat.getColor(this, R.color.white));
 
         // update best score
         TextView bestScore = findViewById(R.id.best_score);
@@ -94,6 +95,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         bestScore.setTypeface(null, Typeface.BOLD);
+        bestScore.setTextColor(ContextCompat.getColor(this, R.color.white));
     }
 
     private void setUpGrid(final int dimX, final int dimY, int numMines) {
@@ -179,7 +181,7 @@ public class GameActivity extends AppCompatActivity {
             button.setTypeface(null, Typeface.BOLD);
 
             // https://stackoverflow.com/questions/31842983/getresources-getcolor-is-deprecated
-            button.setTextColor(ContextCompat.getColor(this, R.color.royal_blue));
+            button.setTextColor(ContextCompat.getColor(this, R.color.black));
 
             // Initial scan on block with no bitcoin
         } else if (!clickedGrid.isScanned() && !clickedGrid.isMine()) {
@@ -224,7 +226,6 @@ public class GameActivity extends AppCompatActivity {
         ImageView congratsImg = new ImageView(this);
         congratsImg.setImageResource(R.drawable.bitcoin_logo);
 
-
         if (gameLogic.getNumOfMinesFound() == numMines) {
 
             // update game data
@@ -237,7 +238,7 @@ public class GameActivity extends AppCompatActivity {
             winDialog.setTitle(R.string.congratsText);
             winDialog.setMessage(R.string.winnerMsg);
             winDialog.setCancelable(false);
-            winDialog.setNegativeButton("Ok",new DialogInterface.OnClickListener(){
+            winDialog.setNegativeButton(getResources().getString(R.string.dialog_ok),new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick (DialogInterface dialogInterface, int i){
                     finish();
@@ -267,12 +268,15 @@ public class GameActivity extends AppCompatActivity {
         minesFound.setText(getString(R.string.num_bitcoin_display_text_1) +  gameLogic.getNumOfMinesFound()
                             + getString(R.string.num_bitcoin_display_text_2) + numMines + getString(R.string.num_bitcoin_display_text_3));
         minesFound.setTypeface(null, Typeface.BOLD);
+        minesFound.setTextColor(ContextCompat.getColor(this, R.color.white));
+
     }
 
     private void updateScansUsedText() {
         TextView scansUsed = findViewById(R.id.scansUsed);
         scansUsed.setText(getString(R.string.num_attempted_scans) + gameLogic.getNumOfScansDone());
         scansUsed.setTypeface(null, Typeface.BOLD);
+        scansUsed.setTextColor(ContextCompat.getColor(this, R.color.white));
     }
 
     private void updateRowColText(int row, int col) {
