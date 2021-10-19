@@ -50,4 +50,73 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.46" />
 
+    <ImageView
+        android:id="@+id/bitCoinBlock"
+        android:layout_width="155dp"
+        android:layout_height="154dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="92dp"
+        app:layout_constraintEnd_toEndOf="@+id/unscannedBlock"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bitcoin_block" />
+
+    <ImageView
+        android:id="@+id/emptyBlock"
+        android:layout_width="155dp"
+        android:layout_height="154dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/unscannedBlock"
+        app:layout_constraintTop_toBottomOf="@+id/bitCoinBlock"
+        app:layout_constraintVertical_bias="0.888"
+        app:srcCompat="@drawable/empty_block" />
+
+    <ImageView
+        android:id="@+id/unscannedBlock"
+        android:layout_width="155dp"
+        android:layout_height="154dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bitCoinBlock"
+        app:layout_constraintVertical_bias="0.32"
+        app:srcCompat="@drawable/unscanned_block" />
+
+    <TextView
+        android:id="@+id/bitCoinBlockText"
+        android:layout_width="92dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="1dp"
+        android:text="Bitcoin Block"
+        app:layout_constraintBottom_toTopOf="@+id/bitCoinBlock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.554"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/emptyBlockText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="12dp"
+        android:text="Empty Block"
+        app:layout_constraintBottom_toTopOf="@+id/emptyBlock"
+        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+
+    <TextView
+        android:id="@+id/unscannedBlockText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="4dp"
+        android:text="Unscanned Block"
+        app:layout_constraintBottom_toTopOf="@+id/unscannedBlock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.814" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
