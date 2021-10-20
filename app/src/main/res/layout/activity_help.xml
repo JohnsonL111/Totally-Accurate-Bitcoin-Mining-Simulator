@@ -83,6 +83,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/cyberBGLink" />
+
+            <TextView
+                android:id="@+id/scanSoundLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/scanSound" />
+
+            <TextView
+                android:id="@+id/bitcoinFoundLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bitCoinFoundSound" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
