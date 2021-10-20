@@ -41,6 +41,7 @@ public class MainMenuActivity extends AppCompatActivity {
         options.setBoardDimensionX(OptionsActivity.getBoardDimensionX(this));
 
         // generate key based on the game configuration
+        // key will always be unique
         String key = options.getBoardDimensionX()
                 + "x" + options.getBoardDimensionY()
                 + "-" + options.getNumMines();
