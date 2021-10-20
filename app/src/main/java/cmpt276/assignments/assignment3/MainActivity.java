@@ -1,6 +1,7 @@
 package cmpt276.assignments.assignment3;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import cmpt276.assignments.assignment3.ui.MainMenuActivity;
 
 /**
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void bitCoinAnimation(ImageView bitCoin) {
-        final int bitCoinDuration = 5000;
+        final int bitCoinDuration = 3000;
         // Modified from: http://android-coding.blogspot.com/2015/10/interactive-flip-imageview-using.html
         // https://stackoverflow.com/questions/32641150/how-to-make-imageview-constantly-spin
         ObjectAnimator flip = ObjectAnimator.ofFloat(bitCoin, "rotationY", -360f, 360f);

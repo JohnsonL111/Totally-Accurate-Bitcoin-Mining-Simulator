@@ -1,55 +1,55 @@
 package cmpt276.assignments.assignment3.model;
 
 /**
- * Underlying class for each block/grid in the game.
+ * Underlying class for each block the blockchain
  */
 public class Block {
     private boolean isScanned; // so can only scan once (unless uncovered mine)
-    private boolean isMine;
-    private boolean isMineFound;
-    private int localMineCounter = 0; // the number after scanning the row/col
+    private boolean isBitcoin;
+    private boolean isBitcoinFound;
+    private int localBitcoinCounter = 0; // the number after scanning the row/col
 
-    public Block(boolean isScanned, boolean isMine, boolean isMineFound) {
+    public Block(boolean isScanned, boolean isBitcoin, boolean isBitcoinFound) {
         this.isScanned = isScanned;
-        this.isMine = isMine;
-        this.isMineFound = isMineFound;
+        this.isBitcoin = isBitcoin;
+        this.isBitcoinFound = isBitcoinFound;
     }
 
     public boolean isScanned() {
         return isScanned;
     }
 
-    public int getLocalMineCounter() {
-        return localMineCounter;
+    public int getLocalBitcoinCounter() {
+        return localBitcoinCounter;
     }
 
     public boolean isBitcoin() {
-        return isMine;
+        return isBitcoin;
     }
 
-    public boolean isMineFound() {
-        return isMineFound;
+    public boolean isBitcoinFound() {
+        return isBitcoinFound;
     }
 
     public void setScanned(boolean scanned) {
         isScanned = scanned;
     }
 
-    public void setBitcoin(boolean mine) {
-        isMine = mine;
+    public void setBitcoin(boolean bitCoin) {
+        isBitcoin = bitCoin;
     }
 
-    public void setMineFound(boolean mineFound) {
-        isMineFound = mineFound;
+    public void setBitcoinFound(boolean bitcoinFound) {
+        isBitcoinFound = bitcoinFound;
     }
 
-    public void setLocalBitCoinCounter(int localMineCounter) {
-        this.localMineCounter = localMineCounter;
+    public void setLocalBitCoinCounter(int localBitCoinCounter) {
+        this.localBitcoinCounter = localBitCoinCounter;
     }
 
     public void decrementLocalMineCounter() {
-        if (localMineCounter != 0) {
-            localMineCounter--;
+        if (localBitcoinCounter != 0) {
+            localBitcoinCounter--;
         }
     }
 }
