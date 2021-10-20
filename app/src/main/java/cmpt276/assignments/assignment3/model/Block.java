@@ -1,5 +1,8 @@
 package cmpt276.assignments.assignment3.model;
 
+/**
+ * Underlying class for each block/grid in the game.
+ */
 public class Block {
     private boolean isScanned; // so can only scan once (unless uncovered mine)
     private boolean isMine;
@@ -12,35 +15,39 @@ public class Block {
         this.isMineFound = isMineFound;
     }
 
-    // getter
     public boolean isScanned() {
         return isScanned;
     }
+
     public int getLocalMineCounter() {
         return localMineCounter;
     }
+
     public boolean isBitcoin() {
         return isMine;
     }
+
     public boolean isMineFound() {
         return isMineFound;
     }
 
-    // setter
     public void setScanned(boolean scanned) {
         isScanned = scanned;
     }
+
     public void setBitcoin(boolean mine) {
         isMine = mine;
     }
+
     public void setMineFound(boolean mineFound) {
         isMineFound = mineFound;
     }
+
     public void setLocalBitCoinCounter(int localMineCounter) {
         this.localMineCounter = localMineCounter;
     }
 
-    public void decrementLocalMineCounter () {
+    public void decrementLocalMineCounter() {
         if (localMineCounter != 0) {
             localMineCounter--;
         }

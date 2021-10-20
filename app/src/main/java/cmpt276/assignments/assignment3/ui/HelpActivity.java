@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
-import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 import cmpt276.assignments.assignment3.R;
 
+/**
+ * Sets help screen activity and deals with the hyperlinks for citations.
+ */
 public class HelpActivity extends AppCompatActivity {
 
     @Override

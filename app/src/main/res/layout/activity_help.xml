@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/help_title"
-        android:textSize="28sp"
         android:textColor="@color/white"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.088"
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.742" >
+        app:layout_constraintVertical_bias="0.742">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,29 +42,29 @@
                 android:id="@+id/gameBasics"
                 android:layout_width="match_parent"
                 android:layout_height="254dp"
-                android:textColor="@color/white"
-                android:text="@string/gameBasics" />
+                android:text="@string/gameBasics"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/authorInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="@string/authorInfo" />
+                android:text="@string/authorInfo"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/courseInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="@string/courseInfo" />
+                android:text="@string/courseInfo"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/resourcesUsed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="@string/resourcesUsed" />
+                android:text="@string/resourcesUsed"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/gridImgLink"

@@ -1,10 +1,8 @@
 package cmpt276.assignments.assignment3;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.animation.Animation;
@@ -12,9 +10,11 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import cmpt276.assignments.assignment3.ui.MainMenuActivity;
 
+/**
+ * Entrance activity. Animations are implemented here.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -33,9 +33,11 @@ public class MainActivity extends AppCompatActivity {
     // Citation: https://abhiandroid.com/ui/countdown-timer
     private void waitFourSeconds() {
         // four second delay until switch to main menu activity.
-        new CountDownTimer(4000, 1000){
-            public void onTick(long millisUntilFinished){ }
-            public  void onFinish(){
+        new CountDownTimer(4000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
                 // make intent to launch HelpActivity
                 Intent helpIntent = MainMenuActivity.makeIntent(MainActivity.this);
                 startActivity(helpIntent);

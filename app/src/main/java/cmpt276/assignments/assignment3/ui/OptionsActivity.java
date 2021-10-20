@@ -15,6 +15,9 @@ import android.widget.RadioGroup;
 import cmpt276.assignments.assignment3.R;
 import cmpt276.assignments.assignment3.model.OptionsManager;
 
+/**
+ * Sets UI for the options activity and implements game configuration functionality.
+ */
 public class OptionsActivity extends AppCompatActivity {
     protected static final String BOARD_SIZE_X_PREFS = "BoardSizeXPrefs";
     protected static final String BOARD_SIZE_Y_PREFS = "BoardSizeYPrefs";
@@ -67,14 +70,14 @@ public class OptionsActivity extends AppCompatActivity {
         int[] boardSizeXList = getResources().getIntArray(R.array.board_list_x);
         int[] boardSizeYList = getResources().getIntArray(R.array.board_list_y);
 
-        for(int i = 0; i < boardSizeXList.length; i++){
+        for (int i = 0; i < boardSizeXList.length; i++) {
             final int boardDimensionX = boardSizeXList[i];
             final int boardDimensionY = boardSizeYList[i];
 
             RadioButton boardSizeBtn = new RadioButton(this);
             boardSizeBtn.setText(
                     boardDimensionX + getString(R.string.rows) +
-                    boardDimensionY + getString(R.string.columns)
+                            boardDimensionY + getString(R.string.columns)
             );
 
             // set options to singleton
@@ -90,7 +93,7 @@ public class OptionsActivity extends AppCompatActivity {
 
             boardSizeGroup.addView(boardSizeBtn);
 
-            if (boardDimensionX == getBoardDimensionX(this)){
+            if (boardDimensionX == getBoardDimensionX(this)) {
                 boardSizeBtn.setChecked(true);
             }
         }
@@ -106,14 +109,14 @@ public class OptionsActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    static public int getBoardDimensionX(Context context){
+    static public int getBoardDimensionX(Context context) {
         SharedPreferences boardSizePrefs = context.getSharedPreferences(APP_PREFS, MODE_PRIVATE);
 
         int defaultDimX = context.getResources().getInteger(R.integer.default_dimension_x);
         return boardSizePrefs.getInt(BOARD_SIZE_X_PREFS, defaultDimX);
     }
 
-    static public int getBoardDimensionY(Context context){
+    static public int getBoardDimensionY(Context context) {
         SharedPreferences boardSizePrefs = context.getSharedPreferences(APP_PREFS, MODE_PRIVATE);
 
         int defaultDimY = context.getResources().getInteger(R.integer.default_dimension_y);
@@ -157,7 +160,7 @@ public class OptionsActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    static public int getNumMines(Context context){
+    static public int getNumMines(Context context) {
         SharedPreferences boardSizePrefs = context.getSharedPreferences(APP_PREFS, MODE_PRIVATE);
         int defaultMines = context.getResources().getInteger(R.integer.default_num_mines);
 

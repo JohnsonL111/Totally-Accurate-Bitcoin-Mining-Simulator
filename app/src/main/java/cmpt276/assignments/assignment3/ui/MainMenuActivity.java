@@ -4,14 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-
 import cmpt276.assignments.assignment3.R;
 import cmpt276.assignments.assignment3.model.OptionsManager;
 
+/**
+ * Sets UI for the main menu with links to other activities.
+ */
 public class MainMenuActivity extends AppCompatActivity {
     private OptionsManager options;
 
@@ -61,36 +61,27 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void setHelpButton() {
         Button helpBtn = findViewById(R.id.helpBtn);
-        helpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        helpBtn.setOnClickListener(view -> {
 
-                // make intent to launch HelpActivity
-                Intent helpIntent = HelpActivity.makeIntent(MainMenuActivity.this);
-                startActivity(helpIntent);
-            }
+            // make intent to launch HelpActivity
+            Intent helpIntent = HelpActivity.makeIntent(MainMenuActivity.this);
+            startActivity(helpIntent);
         });
     }
 
     private void setOptionsButton() {
         Button optionsBtn = findViewById(R.id.optionsBtn);
-        optionsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent optionsIntent = OptionsActivity.makeIntent(MainMenuActivity.this);
-                startActivity(optionsIntent);
-            }
+        optionsBtn.setOnClickListener(view -> {
+            Intent optionsIntent = OptionsActivity.makeIntent(MainMenuActivity.this);
+            startActivity(optionsIntent);
         });
     }
 
     private void setGameButton() {
         Button gameBtn = findViewById(R.id.gameBtn);
-        gameBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent gameIntent = GameActivity.makeIntent(MainMenuActivity.this);
-                startActivity(gameIntent);
-            }
+        gameBtn.setOnClickListener(view -> {
+            Intent gameIntent = GameActivity.makeIntent(MainMenuActivity.this);
+            startActivity(gameIntent);
         });
     }
 

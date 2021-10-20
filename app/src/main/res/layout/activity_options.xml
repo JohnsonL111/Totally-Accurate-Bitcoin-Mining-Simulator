@@ -24,8 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/blockchain_size_title"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
 
         <RadioGroup
             android:id="@+id/radio_group_board_size"
@@ -59,14 +58,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/number_of_bitcoins_title"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
 
         <RadioGroup
             android:id="@+id/radio_group_num_mines"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -101,8 +98,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/options"
-        android:textSize="28sp"
         android:textColor="@color/white"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.236"

@@ -2,10 +2,12 @@ package cmpt276.assignments.assignment3.model;
 
 import java.util.Random;
 
-// Handles Game Functionality like:
-// (1) Handles which blocks contain bitcoins (sets the bitcoin locations).
-// (2) Getting number of bitcoin vertically/horizontally (scan).
-// (3) Dynamically updating bitcoin counts in row/col when a new bitcoin is found.
+/**
+ * Handles Game Functionality like:
+ * (1) Which blocks contain bitcoins (sets the bitcoin locations).
+ * (2) Getting number of bitcoin vertically/horizontally (scan).
+ * (3) Dynamically updating bitcoin counts in row/col when a new bitcoin is found.
+ */
 public class GameManager {
     private final int NUM_MINES;
     private final int NUM_ROWS;
@@ -45,7 +47,7 @@ public class GameManager {
     }
 
     // Instantiate Block objects.
-    private void fillBlockChain(){
+    private void fillBlockChain() {
         for (int row = 0; row < NUM_ROWS; ++row) {
             for (int col = 0; col < NUM_COLS; ++col) {
                 blockChain[row][col] = new Block(false, false, false);
@@ -128,6 +130,7 @@ public class GameManager {
             }
         }
 
+        // Don't set to scanned if bitcoin because 2nd click on bitcoin block does the scan.
         if (!gridToScan.isBitcoin()) {
             gridToScan.setScanned(true);
         }

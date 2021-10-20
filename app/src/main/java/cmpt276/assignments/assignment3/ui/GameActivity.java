@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -14,7 +13,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -26,11 +24,17 @@ import cmpt276.assignments.assignment3.model.GameManager;
 import cmpt276.assignments.assignment3.model.Block;
 import cmpt276.assignments.assignment3.model.OptionsManager;
 
-// Implements grid UI functionality.
-// Interacts with GameManager.java when a grid is clicked.
-// Citation: https://www.youtube.com/watch?v=4MFzuP1F-xQ (Brian Fraser's Dynamic Button + images vid).
+
 // set text to bold
 // https://stackoverflow.com/questions/6200533/how-to-set-textview-textstyle-such-as-bold-italic
+
+/**
+ * Implements grid UI functionality.
+ * Interacts with GameManager.java when a grid is clicked:
+ * Citation: https://www.youtube.com/watch?v=4MFzuP1F-xQ (Brian Fraser's Dynamic Button + images vid).
+ * Set text to bold:
+ * Citation: https://stackoverflow.com/questions/6200533/how-to-set-textview-textstyle-such-as-bold-italic
+ */
 public class GameActivity extends AppCompatActivity {
     private OptionsManager options;
     private GameManager gameLogic;
@@ -65,7 +69,7 @@ public class GameActivity extends AppCompatActivity {
             isInitiallyRevealed -> to prevent onWindowFocusChanged to set grid images
             to be un-scanned after the first window focus when starting GameActivity
          */
-        if(hasFocus && isInitiallyRevealed){
+        if (hasFocus && isInitiallyRevealed) {
             for (int i = 0; i < options.getBoardDimensionX(); i++) {
                 for (int j = 0; j < options.getBoardDimensionY(); j++) {
                     setButtonImage(buttons[i][j], "Un-scanned Block");
@@ -75,21 +79,21 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void setGameDataText(){
+    private void setGameDataText() {
         // update total games
         TextView totalGames = findViewById(R.id.total_games_played);
         totalGames.setText(getResources().getString(R.string.total_games_update)
-                        + " " + options.getTotalGames()
-                );
+                + " " + options.getTotalGames()
+        );
         totalGames.setTypeface(null, Typeface.BOLD);
         totalGames.setTextColor(ContextCompat.getColor(this, R.color.white));
 
         // update best score
         TextView bestScore = findViewById(R.id.best_score);
-        if(options.getBestScore() == getResources().getInteger(R.integer.no_best_score)){
+        if (options.getBestScore() == getResources().getInteger(R.integer.no_best_score)) {
             bestScore.setText(getResources().getString(R.string.best_score_update)
                     + getString(R.string.not_applicable));
-        }else{
+        } else {
             bestScore.setText(getResources().getString(R.string.best_score_update)
                     + " " + options.getBestScore());
         }
@@ -137,12 +141,7 @@ public class GameActivity extends AppCompatActivity {
                 button.setPadding(0, 0, 0, 0);
 
                 // Implements On-Click functionality for grids.
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        gridButtonClicked(FINAL_ROW, FINAL_COL);
-                    }
-                });
+                button.setOnClickListener(view -> gridButtonClicked(FINAL_ROW, FINAL_COL));
 
                 tableRow.addView(button);
                 buttons[row][col] = button;
@@ -238,12 +237,8 @@ public class GameActivity extends AppCompatActivity {
             winDialog.setTitle(R.string.congratsText);
             winDialog.setMessage(R.string.winnerMsg);
             winDialog.setCancelable(false);
-            winDialog.setNegativeButton(getResources().getString(R.string.dialog_ok),new DialogInterface.OnClickListener(){
-                @Override
-                public void onClick (DialogInterface dialogInterface, int i){
-                    finish();
-                }
-            }).setView(congratsImg);
+            winDialog.setNegativeButton(getResources().getString(R.string.dialog_ok),
+                    (dialogInterface, i) -> finish()).setView(congratsImg);
             winDialog.show();
         }
     }
@@ -254,7 +249,7 @@ public class GameActivity extends AppCompatActivity {
         options.setTotalGames(numGames);
     }
 
-    private void updateBestScore(int currentScore){
+    private void updateBestScore(int currentScore) {
         int bestScore = options.getBestScore();
 
         if (bestScore == getResources().getInteger(R.integer.no_best_score) || bestScore > currentScore) {
@@ -265,8 +260,8 @@ public class GameActivity extends AppCompatActivity {
 
     private void updateMinesFoundText() {
         TextView minesFound = findViewById(R.id.minesFound);
-        minesFound.setText(getString(R.string.num_bitcoin_display_text_1) +  gameLogic.getNumBitcoinFound()
-                            + getString(R.string.num_bitcoin_display_text_2) + numMines + getString(R.string.num_bitcoin_display_text_3));
+        minesFound.setText(getString(R.string.num_bitcoin_display_text_1) + gameLogic.getNumBitcoinFound()
+                + getString(R.string.num_bitcoin_display_text_2) + numMines + getString(R.string.num_bitcoin_display_text_3));
         minesFound.setTypeface(null, Typeface.BOLD);
         minesFound.setTextColor(ContextCompat.getColor(this, R.color.white));
 
@@ -323,7 +318,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void saveTotalGames(int numGames){
+    private void saveTotalGames(int numGames) {
         SharedPreferences prefs = this.getSharedPreferences(OptionsManager.getGameData(), MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(OptionsManager.getTotalGamesKey(), numGames);
@@ -332,24 +327,24 @@ public class GameActivity extends AppCompatActivity {
         System.out.println(getTotalGames(this));
     }
 
-    static public int getTotalGames(Context context){
+    static public int getTotalGames(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(OptionsManager.getGameData(), MODE_PRIVATE);
         int noGames = context.getResources().getInteger(R.integer.initial_total_games);
 
-        return prefs.getInt(OptionsManager.getTotalGamesKey(),noGames);
+        return prefs.getInt(OptionsManager.getTotalGamesKey(), noGames);
     }
 
-    private void saveGameConfigScore(int bestScore, final String key){
+    private void saveGameConfigScore(int bestScore, final String key) {
         SharedPreferences prefs = this.getSharedPreferences(OptionsManager.getGameData(), MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(key, bestScore);
         editor.apply();
     }
 
-    static public int getGameConfigScore(Context context, final String key){
+    static public int getGameConfigScore(Context context, final String key) {
         SharedPreferences prefs = context.getSharedPreferences(OptionsManager.getGameData(), MODE_PRIVATE);
         int noScore = context.getResources().getInteger(R.integer.no_best_score);
-        return prefs.getInt(key,noScore);
+        return prefs.getInt(key, noScore);
     }
 
 }

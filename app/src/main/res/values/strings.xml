@@ -1,21 +1,21 @@
 <resources>
-    <string name = "app_name">Totally Accurate ₿itcoin Mining Simulator</string>
-    <string name = "main_menu">START</string>
-    <string name = "app_title"><b>Totally Accurate
+    <string name="app_name">Totally Accurate ₿itcoin Mining Simulator</string>
+    <string name="main_menu">START</string>
+    <string name="app_title"><b>Totally Accurate
         \n₿itcoin Mining Simulator
         </b>
     </string>
 
-    <string name = "app_authors">by Jerry Deng &amp; Johnson Luong</string>
-    <string name = "helpBtn">Help</string>
-    <string name = "gameBtn">Play Game</string>
-    <string name = "optionsBtn">Options</string>
-    <string name = "bitCoinLogoLink">" • "<a href="https://freebiesupply.com/logos/bitcoin-logo/">Link to bitcoin logo</a></string>
-    <string name = "gridImgLink">" • "<a href="https://www.figma.com/file/pDBTKDXzDK6oZYA0oRJEZo/block?node-id=3%3A5">Link to block icons</a></string>
-    <string name = "cyberBGLink">" • "<a href="https://wallpapersafari.com/cyber-wallpapers/" >Link to cyber wallpaper</a></string>
-    <string name = "resourcesUsed"><b>\nResources: </b> \nBlock icons used were designed and created by Jerry</string>
-    <string name = "courseInfo">" • "<a href = "https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">link to course page</a></string>
-    <string name = "gameBasics">
+    <string name="app_authors">by Jerry Deng &amp; Johnson Luong</string>
+    <string name="helpBtn">Help</string>
+    <string name="gameBtn">Play Game</string>
+    <string name="optionsBtn">Options</string>
+    <string name="bitCoinLogoLink">" • "<a href="https://freebiesupply.com/logos/bitcoin-logo/">Link to bitcoin logo</a></string>
+    <string name="gridImgLink">" • "<a href="https://www.figma.com/file/pDBTKDXzDK6oZYA0oRJEZo/block?node-id=3%3A5">Link to block icons</a></string>
+    <string name="cyberBGLink">" • "<a href="https://wallpapersafari.com/cyber-wallpapers/">Link to cyber wallpaper</a></string>
+    <string name="resourcesUsed"><b>\nResources: </b> \nBlock icons used were designed and created by Jerry</string>
+    <string name="courseInfo">" • "<a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">link to course page</a></string>
+    <string name="gameBasics">
 
 \n<b>Game Basics:</b>
         \n\"Totally Accurate ₿itcoin Mining Simulator\” is a knock-off version of the famous “Minesweeper” game.
@@ -30,7 +30,7 @@
         Tapping on already scanned empty blocks or already scanned revealed Bitcoins will not initiate another scan.
     </string>
 
-    <string name = "authorInfo"> "<b>\nAbout The Authors:</b>
+    <string name="authorInfo"> "<b>\nAbout The Authors:</b>
 \nJohnson and Jerry are two sleep deprived and functionally depressed 2nd year SFU CS &amp; SoSy students trying to make it through university.
  \n\nThis application is developed towards an assignment for the course CMPT 276: Intro to Software Engineering
     </string>
