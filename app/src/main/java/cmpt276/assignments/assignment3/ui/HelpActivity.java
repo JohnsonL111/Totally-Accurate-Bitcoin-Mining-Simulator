@@ -25,12 +25,15 @@ public class HelpActivity extends AppCompatActivity {
         TextView gridImgTextView = findViewById(R.id.gridImgLink);
         TextView bitCoinImgTextView = findViewById(R.id.bitCoinLogoLink);
         TextView cyberBGTextView = findViewById(R.id.cyberBGLink);
+        TextView bitCoinFoundTextView = findViewById(R.id.bitcoinFoundLink);
+        TextView scanSoundTextView = findViewById(R.id.scanSoundLink);
 
         courseTextView.setMovementMethod(LinkMovementMethod.getInstance());
         gridImgTextView.setMovementMethod(LinkMovementMethod.getInstance());
         bitCoinImgTextView.setMovementMethod(LinkMovementMethod.getInstance());
         cyberBGTextView.setMovementMethod(LinkMovementMethod.getInstance());
-
+        bitCoinFoundTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        scanSoundTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     public static Intent makeIntent(Context context) {
