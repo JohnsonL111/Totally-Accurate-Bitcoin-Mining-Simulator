@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,10 +24,6 @@ import cmpt276.assignments.assignment3.R;
 import cmpt276.assignments.assignment3.model.GameManager;
 import cmpt276.assignments.assignment3.model.Block;
 import cmpt276.assignments.assignment3.model.OptionsManager;
-
-
-// set text to bold
-// https://stackoverflow.com/questions/6200533/how-to-set-textview-textstyle-such-as-bold-italic
 
 /**
  * Implements grid UI functionality.
@@ -162,6 +159,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Initial protocol for tapping unrevealed bitcoin.
         if (clickedGrid.isBitcoin() && !clickedGrid.isMineFound()) {
+            findBitCoinSound();
             clickedGrid.setMineFound(true);
             gameLogic.IncrementNumBitcoinFound();
 
@@ -174,6 +172,7 @@ public class GameActivity extends AppCompatActivity {
         }
         // Initial Scan on revealed bitcoin.
         else if (!clickedGrid.isScanned() && clickedGrid.isMineFound()) {
+            scanSound();
             gameLogic.scan(row, col);
             clickedGrid.setScanned(true);
             button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
@@ -184,6 +183,7 @@ public class GameActivity extends AppCompatActivity {
 
             // Initial scan on block with no bitcoin
         } else if (!clickedGrid.isScanned() && !clickedGrid.isBitcoin()) {
+            scanSound();
             gameLogic.scan(row, col);
             button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
             button.setTypeface(null, Typeface.BOLD);
@@ -194,6 +194,16 @@ public class GameActivity extends AppCompatActivity {
         updateScansUsedText();
         updateMinesFoundText();
         checkIfWin();
+    }
+
+    private void findBitCoinSound() {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.mine_found);
+        mp.start();
+    }
+
+    private void scanSound() {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.scan_sound);
+        mp.start();
     }
 
     private void setButtonImage(Button button, String buttonImageType) {
