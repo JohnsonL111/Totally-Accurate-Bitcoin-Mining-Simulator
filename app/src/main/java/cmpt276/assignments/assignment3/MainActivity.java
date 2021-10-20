@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     // Citation: https://abhiandroid.com/ui/countdown-timer
     private void waitFourSeconds() {
         // four second delay until switch to main menu activity.
-        new CountDownTimer(4000, 1000) {
+        new CountDownTimer(5000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
 
