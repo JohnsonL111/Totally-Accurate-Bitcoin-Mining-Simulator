@@ -23,9 +23,9 @@
 
     <Button
         android:id="@+id/gameBtn"
-        android:layout_width="147dp"
-        android:layout_height="51dp"
-        android:drawableLeft="@android:drawable/ic_media_play"
+        android:layout_width="153dp"
+        android:layout_height="50dp"
+        android:drawableLeft="@drawable/ic_baseline_play_arrow_24"
         android:text="@string/gameBtn"
         app:layout_constraintBottom_toTopOf="@+id/optionsBtn"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -36,10 +36,10 @@
 
     <Button
         android:id="@+id/helpBtn"
-        android:layout_width="147dp"
-        android:layout_height="51dp"
+        android:layout_width="153dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="4dp"
-        android:drawableLeft="@android:drawable/ic_menu_help"
+        android:drawableLeft="@drawable/ic_baseline_help_outline_24"
         android:text="@string/helpBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -50,9 +50,9 @@
 
     <Button
         android:id="@+id/optionsBtn"
-        android:layout_width="147dp"
-        android:layout_height="51dp"
-        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:layout_width="153dp"
+        android:layout_height="50dp"
+        android:drawableLeft="@drawable/ic_baseline_settings_24"
         android:text="@string/optionsBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
