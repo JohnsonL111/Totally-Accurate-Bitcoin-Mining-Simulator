@@ -100,7 +100,7 @@ public class GameManager {
             }
 
             // Update number of bitcoin found.
-            if (scannedGrid.isBitcoin() && !scannedGrid.isMineFound()) {
+            if (scannedGrid.isBitcoin() && !scannedGrid.isBitcoinFound()) {
                 numBitcoin++;
             }
 
@@ -120,7 +120,7 @@ public class GameManager {
             }
 
             // Update number of bitcoins found.
-            if (scannedGrid.isBitcoin() && !scannedGrid.isMineFound()) {
+            if (scannedGrid.isBitcoin() && !scannedGrid.isBitcoinFound()) {
                 numBitcoin++;
             }
 

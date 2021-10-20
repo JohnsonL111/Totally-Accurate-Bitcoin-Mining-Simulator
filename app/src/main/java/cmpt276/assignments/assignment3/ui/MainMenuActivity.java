@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
 import cmpt276.assignments.assignment3.R;
 import cmpt276.assignments.assignment3.model.OptionsManager;
 

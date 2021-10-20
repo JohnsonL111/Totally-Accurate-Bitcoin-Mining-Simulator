@@ -3,14 +3,14 @@
 
 <!--     Citation: https://www.geeksforgeeks.org/animation-in-android-with-example/-->
     <rotate
-        android:duration= "7000"
+        android:duration="8000"
         android:fromDegrees="0"
         android:pivotX="90%"
         android:pivotY="90%"
         android:toDegrees="-360" />
 
     <rotate
-        android:duration="7000"
+        android:duration="8000"
         android:fromDegrees="-360"
         android:pivotX="-90%"
         android:pivotY="-90%"

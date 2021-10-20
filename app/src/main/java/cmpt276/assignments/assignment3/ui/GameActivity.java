@@ -158,9 +158,9 @@ public class GameActivity extends AppCompatActivity {
         Button button = buttons[row][col];
 
         // Initial protocol for tapping unrevealed bitcoin.
-        if (clickedGrid.isBitcoin() && !clickedGrid.isMineFound()) {
+        if (clickedGrid.isBitcoin() && !clickedGrid.isBitcoinFound()) {
             findBitCoinSound();
-            clickedGrid.setMineFound(true);
+            clickedGrid.setBitcoinFound(true);
             gameLogic.IncrementNumBitcoinFound();
 
             // Updates the rowCol values and updates corresponding UI.
@@ -171,11 +171,11 @@ public class GameActivity extends AppCompatActivity {
             setButtonImage(button, "Scanned Bitcoin Block");
         }
         // Initial Scan on revealed bitcoin.
-        else if (!clickedGrid.isScanned() && clickedGrid.isMineFound()) {
+        else if (!clickedGrid.isScanned() && clickedGrid.isBitcoinFound()) {
             scanSound();
             gameLogic.scan(row, col);
             clickedGrid.setScanned(true);
-            button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
+            button.setText(String.valueOf(clickedGrid.getLocalBitcoinCounter()));
             button.setTypeface(null, Typeface.BOLD);
 
             // https://stackoverflow.com/questions/31842983/getresources-getcolor-is-deprecated
@@ -185,7 +185,7 @@ public class GameActivity extends AppCompatActivity {
         } else if (!clickedGrid.isScanned() && !clickedGrid.isBitcoin()) {
             scanSound();
             gameLogic.scan(row, col);
-            button.setText(String.valueOf(clickedGrid.getLocalMineCounter()));
+            button.setText(String.valueOf(clickedGrid.getLocalBitcoinCounter()));
             button.setTypeface(null, Typeface.BOLD);
             button.setTextColor(ContextCompat.getColor(this, R.color.white));
             setButtonImage(button, "Scanned Empty Block");
@@ -293,7 +293,7 @@ public class GameActivity extends AppCompatActivity {
             if (!gridToUpdate.isScanned()) {
                 continue;
             }
-            button.setText(String.valueOf(gridToUpdate.getLocalMineCounter()));
+            button.setText(String.valueOf(gridToUpdate.getLocalBitcoinCounter()));
         }
 
         // Updates text for grids in the same col as the clicked grid.
@@ -304,7 +304,7 @@ public class GameActivity extends AppCompatActivity {
             if (!gridToUpdate.isScanned()) {
                 continue;
             }
-            button.setText(String.valueOf(gridToUpdate.getLocalMineCounter()));
+            button.setText(String.valueOf(gridToUpdate.getLocalBitcoinCounter()));
         }
     }
 
