@@ -1,5 +1,4 @@
 # BitCoin-Minesweeper
-# Credits to: CMPT 276 Intro to Software Engineering A3
 
 Android app: Minesweeper, but with bitcoins! <br/>
 ![2021-11-05-01-19-06](https://user-images.githubusercontent.com/38903775/140480070-74e5f17c-2650-40e6-8617-57d583bd4eaa.png)
