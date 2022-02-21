@@ -1,4 +1,4 @@
-# BitCoin-Minesweeper
+# BitCoin-Minefinder (yes not sweeper)
 
 Android app: Minesweeper, but with bitcoins! <br/>
 
