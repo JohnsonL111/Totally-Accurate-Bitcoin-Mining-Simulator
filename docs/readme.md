@@ -1,6 +1,8 @@
 # BitCoin-Minesweeper
 
 Android app: Minesweeper, but with bitcoins! <br/>
+
+# Some Pictures of the App
 ![2021-11-05-01-19-06](https://user-images.githubusercontent.com/38903775/140480070-74e5f17c-2650-40e6-8617-57d583bd4eaa.png)
 ![2021-11-05-01-19-24](https://user-images.githubusercontent.com/38903775/140480074-971d8eb3-7760-46e7-9cc1-8fb9cc4886a9.png)
 
